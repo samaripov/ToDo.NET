@@ -1,4 +1,5 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 
 @using Models
 @using ToDo.FrontEnd.Components.Layout
@@ -17,7 +18,7 @@
 </div>
 
 @code {
-  private ToDo[] toDos =
+  private List<ToDo> toDos =
   [
   new() {
       Id = 1,
@@ -37,9 +38,4 @@
       Complete = false
     }
   ];
-
-  private void ToggleComplete(ToDo todo)
-  {
-    todo.Complete = !todo.Complete;
-  }
 }

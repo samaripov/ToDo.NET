@@ -1,9 +1,10 @@
 ﻿
 @using Models
+@rendermode InteractiveServer
 
 <div id="todo_@(todo.Id)" class="horizontal space-between hoverable">
   <div class="horizontal">
-    <input type="checkbox" @onchange="() => ToggleComplete(todo)" checked="@todo.Complete" />
+    <input type="checkbox" checked="@todo.Complete" @onchange="(e) => ToggleComplete()"/>
     <div>
       <h2 class="@(todo.Complete ? "crossed_out" : "")">@todo.Title</h2>
       <p>@todo.Description</p>
@@ -15,11 +16,11 @@
   </div>
 </div>
 
+
 @code {
   [Parameter] public required ToDo todo { get; set; }
-  
-  private void ToggleComplete(ToDo todo)
-  {
+
+  private void ToggleComplete() {
     todo.Complete = !todo.Complete;
   }
 }

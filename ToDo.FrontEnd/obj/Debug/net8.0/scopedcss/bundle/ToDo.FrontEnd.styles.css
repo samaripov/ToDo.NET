@@ -17,3 +17,27 @@
         right: 0.75rem;
         top: 0.5rem;
     }
+/* _content/ToDo.FrontEnd/Components/Layout/ToDoView.razor.rz.scp.css */
+.horizontal[b-ob4f4dny64] {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.horizontal h2[b-ob4f4dny64], .horizontal p[b-ob4f4dny64] {
+    padding: 0;
+    margin: 0;
+}
+
+.space-between[b-ob4f4dny64] {
+    justify-content: space-between;
+}
+
+.todo_list .hoverable:hover[b-ob4f4dny64] {
+    background: #dddddd;
+}
+
+.crossed_out[b-ob4f4dny64] {
+    text-decoration: line-through;
+    color: #929292;
+}
