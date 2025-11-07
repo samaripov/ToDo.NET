@@ -1,0 +1,25 @@
+﻿
+@using Models
+
+<div id="todo_@(todo.Id)" class="horizontal space-between hoverable">
+  <div class="horizontal">
+    <input type="checkbox" @onchange="() => ToggleComplete(todo)" checked="@todo.Complete" />
+    <div>
+      <h2 class="@(todo.Complete ? "crossed_out" : "")">@todo.Title</h2>
+      <p>@todo.Description</p>
+    </div>
+  </div>
+  <div>
+    <a href="">Delete</a>
+    <a href="">Edit</a>
+  </div>
+</div>
+
+@code {
+  [Parameter] public required ToDo todo { get; set; }
+  
+  private void ToggleComplete(ToDo todo)
+  {
+    todo.Complete = !todo.Complete;
+  }
+}

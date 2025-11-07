@@ -50,11 +50,15 @@ h1:focus {
     justify-content: space-between;
 }
 
-.hoverable:hover {
-    background: #f7f7f7;
+.todo_list .hoverable:hover {
+    background: #dddddd;
 }
 
 .crossed_out {
     text-decoration: line-through;
     color: #929292;
+}
+
+.todo_list > div:nth-child(odd) {
+    background: #f8f8f8;
 }

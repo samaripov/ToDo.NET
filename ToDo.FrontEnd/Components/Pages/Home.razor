@@ -1,55 +1,45 @@
 ﻿@page "/"
 
 @using Models
+@using ToDo.FrontEnd.Components.Layout
 
 <PageTitle>Todo List</PageTitle>
-
-<h1>Things to do!</h1>
 
 <a href="">Create a to do</a>
 
 
 
-@foreach (var todo in toDos) {
-    <div id="todo_@(todo.Id)" class="horizontal space-between hoverable">
-        <div class="horizontal">
-            <input type="checkbox" @onchange="() => ToggleComplete(todo)" checked="@todo.Complete"/>
-            <div>
-                <h2 class="@(todo.Complete ? "crossed_out" : "")">@todo.Title</h2>
-                <p>@todo.Description</p>
-            </div>
-        </div>
-        <div>
-            <a href="">Delete</a>
-            <a href="">Edit</a>
-        </div>
-    </div>
-}
+<div class="todo_list">
+  @foreach (var todo in toDos)
+  {
+    <ToDoView todo="@todo"/>
+  }
+</div>
 
 @code {
-    private ToDo[] toDos = 
-    [
-        new() {
-            Id = 1,
-            Title = "Clean the dishes",
-            Description = "The sink is way too full...",
-            Complete = false
-        },
-        new() {
-            Id = 2,
-            Title = "Make bed",
-            Description = "It's messy",
-            Complete = true
-        },
-        new() {
-            Id = 3,
-            Title = "Finish work",
-            Complete = false
-        }
-    ];
-
-    private void ToggleComplete(ToDo todo) 
-    {
-        todo.Complete = !todo.Complete;
+  private ToDo[] toDos =
+  [
+  new() {
+      Id = 1,
+      Title = "Clean the dishes",
+      Description = "The sink is way too full...",
+      Complete = false
+    },
+    new() {
+      Id = 2,
+      Title = "Make bed",
+      Description = "It's messy",
+      Complete = true
+    },
+    new() {
+      Id = 3,
+      Title = "Finish work",
+      Complete = false
     }
+  ];
+
+  private void ToggleComplete(ToDo todo)
+  {
+    todo.Complete = !todo.Complete;
+  }
 }

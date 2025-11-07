@@ -26,3 +26,5 @@ C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\ToDo.FrontEnd.pdb
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\ToDo.FrontEnd.genruntimeconfig.cache
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\ref\ToDo.FrontEnd.dll
+C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\ToDo.FrontEnd.sourcelink.json
+C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\scopedcss\Components\Layout\ToDoView.razor.rz.scp.css

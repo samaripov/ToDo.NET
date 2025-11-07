@@ -1,0 +1,23 @@
+.horizontal {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.horizontal h2, .horizontal p {
+    padding: 0;
+    margin: 0;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.todo_list .hoverable:hover {
+    background: #dddddd;
+}
+
+.crossed_out {
+    text-decoration: line-through;
+    color: #929292;
+}
