@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ToDo.FrontEnd.bundle.scp.css",
+      "PackagePath": "staticwebassets\\ToDo.FrontEnd.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ToDo.FrontEnd.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ToDo.FrontEnd.props",
+      "PackagePath": "build\\ToDo.FrontEnd.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ToDo.FrontEnd.props",
+      "PackagePath": "buildMultiTargeting\\ToDo.FrontEnd.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ToDo.FrontEnd.props",
+      "PackagePath": "buildTransitive\\ToDo.FrontEnd.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
