@@ -13,7 +13,10 @@
 <div class="todo_list">
   @foreach (var todo in toDos)
   {
-    <ToDoView todo="@todo"/>
+    <ToDoView 
+      todo="@todo"
+      OnDelete="@DeleteToDo"
+    />
   }
 </div>
 
@@ -38,4 +41,8 @@
       Complete = false
     }
   ];
+
+  private void DeleteToDo(ToDo todoToDelete) {
+    toDos.Remove(todoToDelete);
+  }
 }
