@@ -32,3 +32,4 @@ C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\bin\Debug\net8
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\bin\Debug\net8.0\Microsoft.JSInterop.WebAssembly.dll
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\ToDo.FrontEnd.csproj.AssemblyReference.cache
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\ToDo.Fro.8081E1AB.Up2Date
+C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\bin\Debug\net8.0\Humanizer.dll

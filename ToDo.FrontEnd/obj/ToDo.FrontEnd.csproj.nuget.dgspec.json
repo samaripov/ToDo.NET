@@ -43,6 +43,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Humanizer.Core": {
+              "target": "Package",
+              "version": "[2.14.1, )"
+            },
             "Microsoft.AspNetCore.Components.Web": {
               "target": "Package",
               "version": "[8.0.0, )"
