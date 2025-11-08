@@ -2,47 +2,42 @@
 @rendermode InteractiveServer
 
 @using Models
+@using ToDo.FrontEnd.Clients
 @using ToDo.FrontEnd.Components.Layout
 
 <PageTitle>Todo List</PageTitle>
 
-<a href="">Create a to do</a>
-
-
-
-<div class="todo_list px-4">
-  @foreach (var todo in toDos)
-  {
-    <ToDoView 
-      todo="@todo"
-      OnDelete="@DeleteToDo"
-    />
-  }
-</div>
+<table class="px-1 table table-hover table-bordered table-striped table-dark">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Task ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Created At</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if(toDos is null) {
+      <p>Loading...</p>
+    } else {
+      @foreach (var todo in toDos)
+      {
+        <ToDoView 
+          todo="@todo"
+        />
+      }
+    }
+  </tbody>
+</table>
 
 @code {
-  private List<ToDo> toDos =
-  [
-  new() {
-      Id = 1,
-      Title = "Clean the dishes",
-      Description = "The sink is way too full...",
-      Complete = false
-    },
-    new() {
-      Id = 2,
-      Title = "Make bed",
-      Description = "It's messy",
-      Complete = true
-    },
-    new() {
-      Id = 3,
-      Title = "Finish work",
-      Complete = false
-    }
-  ];
+    private ToDosClient client = new();
+    private ToDo[]? toDos;
 
-  private void DeleteToDo(ToDo todoToDelete) {
-    toDos.Remove(todoToDelete);
-  }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        toDos = client.GetToDos();
+    }
 }

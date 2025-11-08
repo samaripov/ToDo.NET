@@ -3,7 +3,7 @@ using ToDo.FrontEnd.Models;
 
 public class ToDosClient
 {
-  private List<ToDo> toDos =
+  private readonly List<ToDo> toDos =
   [
   new() {
       Id = 1,
@@ -23,4 +23,6 @@ public class ToDosClient
       Complete = false
     }
   ];
+
+  public ToDo[] GetToDos() => [.. toDos];
 }

@@ -3,31 +3,18 @@
 @using Models
 @rendermode InteractiveServer
 
-<div id="todo_@(todo.Id)" class="horizontal space-between hoverable">
-  <div class="horizontal">
-    <input type="checkbox" checked="@todo.Complete" @onchange="(e) => ToggleComplete()"/>
-    <div>
-      <h2 class="@(todo.Complete ? "crossed_out" : "")">@todo.Title</h2>
-      <p>@todo.Description</p>
-    </div>
-  </div>
-  <p>@todo.CreatedAt.Humanize()</p>
-  <div>
-    <a @onclick="DeleteToDo" @onclick:preventDefault="true">Delete</a>
-    <a href="">Edit</a>
-  </div>
-</div>
-
+<tr id="todo_@(todo.Id)">
+  <th scope="row">@todo.Id</th>
+  <td>@todo.Title</td>
+  <td>@todo.Description</td>
+  <td><span>@todo.CreatedAt.Humanize()</span></td>
+  <td></td>
+</tr>
 
 @code {
   [Parameter] public required ToDo todo { get; set; }
-  [Parameter] public EventCallback<ToDo> OnDelete { get; set; }
 
   private void ToggleComplete() {
     todo.Complete = !todo.Complete;
-  }
-
-  private async Task DeleteToDo() {
-    await OnDelete.InvokeAsync(todo);
   }
 }
