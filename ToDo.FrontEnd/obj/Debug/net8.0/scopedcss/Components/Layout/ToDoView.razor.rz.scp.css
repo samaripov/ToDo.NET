@@ -21,3 +21,7 @@
     text-decoration: line-through;
     color: #929292;
 }
+
+.hoverable:hover[b-ob4f4dny64] {
+    transform: scale(102%);
+}

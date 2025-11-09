@@ -7,29 +7,32 @@
 
 <PageTitle>Todo List</PageTitle>
 
-<table class="px-1 table table-hover table-bordered table-striped table-dark">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Task ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Created At</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @if(toDos is null) {
-      <p>Loading...</p>
-    } else {
-      @foreach (var todo in toDos)
-      {
-        <ToDoView 
-          todo="@todo"
-        />
+<div class="px-3">
+  <table class="table table-bordered table-dark">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" class="bg-primary">Task ID</th>
+        <th scope="col" class="bg-primary">Name</th>
+        <th scope="col" class="bg-primary">Description</th>
+        <th scope="col" class="bg-primary">Priority</th>
+        <th scope="col" class="bg-primary">Created At</th>
+        <th scope="col" class="bg-primary">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if(toDos is null) {
+        <p>Loading...</p>
+      } else {
+        @foreach (var todo in toDos)
+        {
+          <ToDoView 
+            todo="@todo"
+          />
+        }
       }
-    }
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
 
 @code {
     private ToDosClient client = new();
