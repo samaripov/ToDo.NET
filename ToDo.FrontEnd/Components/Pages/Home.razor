@@ -1,7 +1,7 @@
 ﻿@page "/"
 @rendermode InteractiveServer
 
-@using Models
+@using ToDo.FrontEnd.Models
 @using ToDo.FrontEnd.Clients
 @using ToDo.FrontEnd.Components.Layout
 
@@ -20,13 +20,13 @@
       </tr>
     </thead>
     <tbody>
-      @if(toDos is null) {
+      @if(tasks is null) {
         <p>Loading...</p>
       } else {
-        @foreach (var todo in toDos)
+        @foreach (var task in tasks)
         {
-          <ToDoView 
-            todo="@todo"
+          <TaskView
+            task="@task"
           />
         }
       }
@@ -35,12 +35,12 @@
 </div>
 
 @code {
-    private ToDosClient client = new();
-    private ToDo[]? toDos;
+    private TasksClient client = new();
+    private Models.Task[]? tasks;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        toDos = client.GetToDos();
+        tasks = client.GetTasks();
     }
 }

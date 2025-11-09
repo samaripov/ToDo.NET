@@ -1,0 +1,33 @@
+﻿
+@using Humanizer
+@using Models
+@rendermode InteractiveServer
+
+<tr id="task_@(task.Id)" class="hoverable">
+  <th scope="row">@task.Id</th>
+  <td>@task.Title</td>
+  <td>@task.Description</td>
+  <td class="@GetBackgroundColor()">@task.Priority</td>
+  <td><span>@task.CreatedAt.Humanize()</span></td>
+  <td></td>
+</tr>
+
+@code {
+  [Parameter] public required Models.Task task { get; set; }
+  
+  private void ToggleComplete() {
+    task.Complete = !task.Complete;
+  }
+
+  private string GetBackgroundColor() {
+    switch(task.Priority) {
+      case "High":
+        return "bg-danger";
+      case "Medium":
+        return "bg-warning";
+      case "Low":
+        return "bg-success";
+    }
+    return "";
+  }
+}

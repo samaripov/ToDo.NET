@@ -50,6 +50,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-7bi90t7s5k
 
-[C:/Users/aripo/OneDrive/Desktop/BlazorProjects/ToDo/ToDo.FrontEnd/Components/Layout/ToDoView.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcVG9Eb1ZpZXcucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-ob4f4dny64
+[C:/Users/aripo/OneDrive/Desktop/BlazorProjects/ToDo/ToDo.FrontEnd/Components/Layout/TaskView.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcVGFza1ZpZXcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-mvnsz3w1oo
