@@ -41,7 +41,11 @@
     text-decoration: line-through;
     color: #929292;
 }
+tbody .hoverable[b-ob4f4dny64] {
+    transition: transform 0.1s ease-in-out;
+}
 
 .hoverable:hover[b-ob4f4dny64] {
     transform: scale(102%);
+    filter: brightness(110%);
 }
