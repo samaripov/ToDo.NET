@@ -27,9 +27,9 @@ C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\ToDo.FrontEnd.genruntimeconfig.cache
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\ref\ToDo.FrontEnd.dll
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\ToDo.FrontEnd.sourcelink.json
-C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\scopedcss\Components\Layout\ToDoView.razor.rz.scp.css
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\bin\Debug\net8.0\Microsoft.AspNetCore.Components.WebAssembly.dll
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\bin\Debug\net8.0\Microsoft.JSInterop.WebAssembly.dll
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\ToDo.FrontEnd.csproj.AssemblyReference.cache
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\ToDo.Fro.8081E1AB.Up2Date
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\bin\Debug\net8.0\Humanizer.dll
+C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.FrontEnd\obj\Debug\net8.0\scopedcss\Components\Layout\TaskView.razor.rz.scp.css

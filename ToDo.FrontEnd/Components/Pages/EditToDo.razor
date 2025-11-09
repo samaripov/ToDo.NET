@@ -1,6 +1,33 @@
 ﻿@page "/edittask"
+@using ToDo.FrontEnd.Models
 
 <PageTitle>New Task</PageTitle>
 
-<h3>New Task</h3>
-
+<div class="row px-4 justify-content-center">
+  <div class="col-md-6 center">
+    <h3>New Task</h3> 
+    <EditForm Model="@task" FormName="editTask">
+      <div class="mb-3">
+        <InputText id="title" placeholder="Title" @bind-Value="task.Title" class="form-control bg-dark text-white" />
+      </div>
+      <div class="mb-3">
+        <InputTextArea id="description" placeholder="description" @bind-Value="task.Description"
+          class="form-control bg-dark text-white" />
+      </div>
+      <div class="mb-3">
+        <InputSelect id="priority" @bind-Value="task.Priority" class="form-select bg-dark text-white">
+          <option>Select</option>
+          <option class="bg-danger">High</option>
+          <option class="bg-warning">Medium</option>
+          <option class="bg-success">Low</option>
+        </InputSelect>
+      </div>
+    </EditForm>
+  </div>
+</div>
+@code {
+  private Models.Task task { get; set; } = new()
+  {
+    Title = "",
+  };
+}

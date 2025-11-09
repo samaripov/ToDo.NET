@@ -1,31 +1,31 @@
-.horizontal[b-ob4f4dny64] {
+.horizontal[b-mvnsz3w1oo] {
     padding: 0.5rem;
     display: flex;
     align-items: center;
 }
 
-.horizontal h2[b-ob4f4dny64], .horizontal p[b-ob4f4dny64] {
+.horizontal h2[b-mvnsz3w1oo], .horizontal p[b-mvnsz3w1oo] {
     padding: 0;
     margin: 0;
 }
 
-.space-between[b-ob4f4dny64] {
+.space-between[b-mvnsz3w1oo] {
     justify-content: space-between;
 }
 
-.todo_list .hoverable:hover[b-ob4f4dny64] {
+.todo_list .hoverable:hover[b-mvnsz3w1oo] {
     background: #dddddd;
 }
 
-.crossed_out[b-ob4f4dny64] {
+.crossed_out[b-mvnsz3w1oo] {
     text-decoration: line-through;
     color: #929292;
 }
-tbody .hoverable[b-ob4f4dny64] {
+tbody .hoverable[b-mvnsz3w1oo] {
     transition: transform 0.1s ease-in-out;
 }
 
-.hoverable:hover[b-ob4f4dny64] {
+.hoverable:hover[b-mvnsz3w1oo] {
     transform: scale(102%);
     filter: brightness(110%);
 }
