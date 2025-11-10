@@ -7,7 +7,7 @@
 <div class="row px-4 justify-content-center">
   <div class="col-md-6 center">
     <h3>New Task</h3> 
-    <EditForm Model="@task" FormName="editTask">
+    <EditForm Model="@task" FormName="editTask" OnSubmit="HandleSubmit">
       <div class="mb-3">
         <InputText id="title" placeholder="Title" @bind-Value="task.Title" class="form-control bg-dark text-white" />
       </div>
@@ -23,20 +23,27 @@
           <option class="bg-success" value="Low">Low</option>
         </InputSelect>
       </div>
+      <button type="submit" class="btn btn-primary w-100">Add Task</button>
     </EditForm>
   </div>
 </div>
 @code {
-    private Models.Task task { get; set; } = new()
+  [SupplyParameterFromForm]
+  private Models.Task task { get; set; } = new()
   {
-    Title = "",
+    Title = ""
   };
 
-    private TasksClient tasksClient = new TasksClient();
-    private List<Models.Task>? tasks;
+  private TasksClient tasksClient = new TasksClient();
+  private List<Models.Task>? tasks;
 
-    protected override void OnInitialized()
-    {
-      tasks = tasksClient.GetTasks();
-    }
+  protected override void OnInitialized()
+  {
+    tasks = tasksClient.GetTasks();
+  }
+
+  private void HandleSubmit() 
+  {
+    tasksClient.AddTask(task);
+  }
 }
