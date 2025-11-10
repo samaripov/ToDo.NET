@@ -7,7 +7,7 @@ public class TasksClient
   new() {
       Id = 1,
       Title = "Clean the dishes",
-      Description = "The sink is way too full... A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dog",
+      Description = "The sink is way too full. A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dog",
       Complete = false,
       Priority = "High"
     },
@@ -30,8 +30,13 @@ public class TasksClient
 
   public void AddTask(Models.Task taskToAdd) 
   {
+    ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Title);
+    ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Description);
     ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Priority);
     taskToAdd.Id = tasks.Count > 0 ? tasks.Count + 1 : 1;
     tasks.Add(taskToAdd);
+    foreach (var task in tasks) {
+      Console.WriteLine(task.ToString());
+    }
   }
 }

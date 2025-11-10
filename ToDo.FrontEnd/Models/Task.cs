@@ -14,4 +14,20 @@ public class Task
   public string? Priority { get; set; }
   public readonly DateTime CreatedAt = DateTime.Now;
   public DateTime CompletedAt { get; set; }
+
+  public string ToString() 
+  {
+    return $"""
+            -------------------
+            ID: {Id}
+            Title: "{Title}"
+            Description: "{AbbreviateDescription()}"
+            Priority: {Priority}
+          """;
+  }
+  public string AbbreviateDescription() 
+  {
+    var maxLength = 30;
+    return Description.Length > maxLength ? Description.Substring(0, maxLength) + "..." : Description;
+  }
 }

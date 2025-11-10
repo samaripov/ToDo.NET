@@ -5,7 +5,7 @@
 <tr id="task_@(task.Id)" class="hoverable">
   <th scope="row">@task.Id</th>
   <td>@task.Title</td>
-  <td>@task.Description</td>
+  <td>@task.AbbreviateDescription()</td>
   <td class="@GetBackgroundColor()">@task.Priority</td>
   <td><span>@task.CreatedAt.Humanize()</span></td>
   <td></td>
