@@ -2,7 +2,7 @@ namespace ToDo.FrontEnd.Clients;
 
 public class TasksClient
 {
-  private readonly Models.Task[] tasks =
+  private readonly List<Models.Task> tasks =
   [
   new() {
       Id = 1,
@@ -26,5 +26,11 @@ public class TasksClient
     }
   ];
 
-  public Models.Task[] GetTasks() => tasks;
+  public List<Models.Task> GetTasks() => tasks;
+
+  public void AddTask(Models.Task taskToAdd) 
+  {
+    taskToAdd.Id = tasks.Count > 0 ? tasks.Count + 1 : 1;
+    tasks.Add(taskToAdd);
+  }
 }
