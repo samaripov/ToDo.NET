@@ -30,6 +30,7 @@ public class TasksClient
 
   public void AddTask(Models.Task taskToAdd) 
   {
+    ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Priority);
     taskToAdd.Id = tasks.Count > 0 ? tasks.Count + 1 : 1;
     tasks.Add(taskToAdd);
   }
