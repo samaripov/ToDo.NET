@@ -1,9 +1,8 @@
 namespace ToDo.FrontEnd.Clients;
 
-using ToDo.FrontEnd.Models;
 public class TasksClient
 {
-  private readonly List<Task> tasks =
+  private readonly Models.Task[] tasks =
   [
   new() {
       Id = 1,
@@ -27,8 +26,5 @@ public class TasksClient
     }
   ];
 
-  public Task[] GetTasks()
-  {
-    return [.. tasks];
-  }
+  public Models.Task[] GetTasks() => tasks;
 }

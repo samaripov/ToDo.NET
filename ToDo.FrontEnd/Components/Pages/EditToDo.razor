@@ -1,4 +1,5 @@
 ﻿@page "/edittask"
+@using ToDo.FrontEnd.Clients
 @using ToDo.FrontEnd.Models
 
 <PageTitle>New Task</PageTitle>
@@ -16,17 +17,26 @@
       </div>
       <div class="mb-3">
         <InputSelect id="priority" @bind-Value="task.Priority" class="form-select bg-dark text-white">
-          <option class="bg-danger">High</option>
-          <option class="bg-warning">Medium</option>
-          <option class="bg-success">Low</option>
+          <option value="">Select a priority</option>
+          <option class="bg-danger" value="High">High</option>
+          <option class="bg-warning" value="Medium">Medium</option>
+          <option class="bg-success" value="Low">Low</option>
         </InputSelect>
       </div>
     </EditForm>
   </div>
 </div>
 @code {
-  private Models.Task task { get; set; } = new()
+    private Models.Task task { get; set; } = new()
   {
     Title = "",
   };
+
+    private TasksClient tasksClient = new TasksClient();
+    private Models.Task[]? tasks;
+
+    protected override void OnInitialized()
+    {
+      tasks = tasksClient.GetTasks();
+    }
 }
