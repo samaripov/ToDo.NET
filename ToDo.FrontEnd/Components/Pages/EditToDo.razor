@@ -1,13 +1,13 @@
 ﻿@page "/edittask"
-@using ToDo.FrontEnd.Clients
-@using ToDo.FrontEnd.Models
+@inject NavigationManager NavigationManager
 
 <PageTitle>New Task</PageTitle>
 
 <div class="row px-4 justify-content-center">
   <div class="col-md-6 center">
     <h3>New Task</h3> 
-    <EditForm Model="@task" FormName="editTask" OnSubmit="HandleSubmit">
+    <EditForm Model="@task" FormName="editTask" OnValidSubmit="HandleSubmit">
+      <DataAnnotationsValidator />
       <div class="mb-3">
         <InputText id="title" placeholder="Title" @bind-Value="task.Title" class="form-control bg-dark text-white" />
       </div>
@@ -23,7 +23,10 @@
           <option class="bg-success" value="Low">Low</option>
         </InputSelect>
       </div>
-      <button type="submit" class="btn btn-primary w-100">Add Task</button>
+      <div class="d-flex flex-row gap-1">
+        <a class="btn btn-danger w-25" role="button" href="/">Cancel</a>
+        <button type="submit" class="btn btn-success w-75">Add Task</button>
+      </div>
     </EditForm>
   </div>
 </div>
@@ -45,5 +48,6 @@
   private void HandleSubmit() 
   {
     tasksClient.AddTask(task);
+    NavigationManager.NavigateTo("/");
   }
 }
