@@ -16,7 +16,7 @@ public class Task
   public readonly DateTime CreatedAt = DateTime.Now;
   public DateTime CompletedAt { get; set; }
 
-  public string ToString() 
+  public override string ToString() 
   {
     return $"""
             -------------------
