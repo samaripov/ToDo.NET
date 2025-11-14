@@ -57,4 +57,9 @@ public class TasksClient
     }
     return 1;
   }
+
+  public Task DeleteTask(int taskId) {
+    tasks.RemoveAll(t => t.Id == taskId);
+    return System.Threading.Tasks.Task.CompletedTask;
+  }  
 }

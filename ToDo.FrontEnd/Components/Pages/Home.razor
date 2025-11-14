@@ -25,6 +25,7 @@
         {
           <TaskView
             task="@task"
+            DeleteTask = "HandleDeleteTask"
           />
         }
       }
@@ -45,5 +46,11 @@
     {
         base.OnInitialized();
         tasks = Client.GetTasksByPriority();
+    }
+
+    private async System.Threading.Tasks.Task HandleDeleteTask(int taskId) {
+      await Client.DeleteTask(taskId);
+      tasks = Client.GetTasksByPriority(reverseByPriority);
+      StateHasChanged();
     }
 }

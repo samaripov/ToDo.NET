@@ -13,16 +13,20 @@
        @(task.Complete ? "Done" : "Awaiting")
     </button>
     <button class="btn bg-warning text-white w-100 mb-1">Edit</button>
-    <button class="btn bg-danger text-white w-100">Delete</button>
+    <button @onclick="HandleTaskDeletion" class="btn bg-danger text-white w-100">Delete</button>
   </td>
 </tr>
 
 @code {
   [Parameter] public required Models.Task task { get; set; }
-  
+  [Parameter] public required EventCallback<int> DeleteTask { get; set; }
+
+  private async System.Threading.Tasks.Task HandleTaskDeletion() {
+    await DeleteTask.InvokeAsync(task.Id);
+  }
+
   private void ToggleComplete() {
     task.Complete = !task.Complete;
-
   }
 
   private string GetBackgroundColor() {
