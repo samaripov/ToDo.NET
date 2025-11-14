@@ -9,11 +9,10 @@
   <table class="table table-bordered table-dark">
     <thead class="thead-dark">
       <tr>
-        <th scope="col" class="bg-primary text-center align-middle">Task ID</th>
         <th scope="col" class="bg-primary text-center align-middle">Title</th>
         <th scope="col" class="bg-primary text-center align-middle">Description</th>
         <th scope="col" class="bg-primary text-center align-middle">Priority</th>
-        <th scope="col" class="bg-primary text-center align-middle">Created At</th>
+        <th scope="col" class="bg-primary text-center align-middle">Created</th>
         <th scope="col" class="bg-primary text-center align-middle">Actions</th>
       </tr>
     </thead>
@@ -47,7 +46,7 @@
         base.OnInitialized();
         tasks = Client.GetTasksByPriority();
     }
-    
+
     private async System.Threading.Tasks.Task HandleDeleteTask(int taskId) {
       await Client.DeleteTask(taskId);
       tasks = Client.GetTasksByPriority(reverseByPriority);
