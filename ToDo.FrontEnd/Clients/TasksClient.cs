@@ -36,7 +36,7 @@ public class TasksClient
     tasks.Add(taskToAdd);
   }
 
-  public List<Models.Task> GetByPriority()
+  public List<Models.Task> GetTasksByPriority()
   {
     return tasks.OrderBy(task => convertPriorityToInt(task.Priority)).ToList();
   }
