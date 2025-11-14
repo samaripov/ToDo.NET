@@ -10,7 +10,7 @@
   <td><span>@task.CreatedAt.Humanize()</span></td>
   <td>
     <button @onclick="ToggleComplete" class="btn @(task.Complete ? "bg-success" : "bg-secondary") text-white w-100 mb-1">
-       @(task.Complete ? "Done" : "Awaiting")
+       @(task.Complete ? "Done "+task.CompletedAt.Humanize() : "Awaiting")
     </button>
     <button class="btn bg-warning text-white w-100 mb-1">Edit</button>
     <button @onclick="HandleTaskDeletion" class="btn bg-danger text-white w-100">Delete</button>
@@ -27,6 +27,7 @@
 
   private void ToggleComplete() {
     task.Complete = !task.Complete;
+    task.CompletedAt = DateTime.Now;
   }
 
   private string GetBackgroundColor() {
