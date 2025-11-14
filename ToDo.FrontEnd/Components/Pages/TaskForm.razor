@@ -67,7 +67,11 @@
 
   private void HandleSubmit() 
   {
-    TasksClient.AddTask(task);
+    if (Task_Id.HasValue) {
+      TasksClient.UpdateTask(task);
+    } else {
+      TasksClient.AddTask(task);
+    }
     NavigationManager.NavigateTo("/");
   }
 }

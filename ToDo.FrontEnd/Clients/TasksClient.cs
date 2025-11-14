@@ -37,6 +37,16 @@ public class TasksClient
     tasks.Add(taskToAdd);
   }
 
+  public bool UpdateTask(Models.Task taskToUpdate) 
+  {
+    ArgumentException.ThrowIfNullOrWhiteSpace(taskToUpdate.Title);
+    ArgumentException.ThrowIfNullOrWhiteSpace(taskToUpdate.Priority);
+    var i = tasks.FindIndex(t => t.Id == taskToUpdate.Id);
+    if (i < 0) return false;
+    tasks[i] = taskToUpdate;
+    return true;
+  }
+
   public List<Models.Task> GetTasksByPriority(Boolean reverse = false)
   {
     var sortedTasks = tasks.OrderBy(task => convertPriorityToInt(task.Priority));
@@ -58,8 +68,15 @@ public class TasksClient
     }
     return 1;
   }
-  public Models.Task GetTaskById(int taskId) {
-    return tasks.Find(task => task.Id == taskId);
+  public Models.Task? GetTaskById(int taskId) {
+    var task = tasks.Find(task => task.Id == taskId);
+    return new Models.Task
+    {
+      Id = task.Id,
+      Title = task.Title,
+      Description = task.Description,
+      Priority = task.Priority
+    };
   }
   public Task DeleteTask(int taskId) {
     tasks.RemoveAll(t => t.Id == taskId);
