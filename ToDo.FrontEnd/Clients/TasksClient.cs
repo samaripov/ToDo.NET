@@ -35,4 +35,21 @@ public class TasksClient
     taskToAdd.Id = tasks.Count > 0 ? tasks.Count + 1 : 1;
     tasks.Add(taskToAdd);
   }
+
+  public List<Models.Task> GetByPriority()
+  {
+    return tasks.OrderBy(task => convertPriorityToInt(task.Priority)).ToList();
+  }
+
+  private int convertPriorityToInt(String priorityString)
+  {
+    switch(priorityString)
+    {
+      case "Medium":
+        return 2;
+      case "Low":
+        return 3;
+    }
+    return 1;
+  }
 }

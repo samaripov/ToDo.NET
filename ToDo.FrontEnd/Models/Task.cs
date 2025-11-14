@@ -12,7 +12,7 @@ public class Task
   public bool Complete { get; set; } = false;
   
   [Required(ErrorMessage = "Please select a priority.")]
-  public string? Priority { get; set; }
+  public required string Priority { get; set; }
   public readonly DateTime CreatedAt = DateTime.Now;
   public DateTime CompletedAt { get; set; }
 
