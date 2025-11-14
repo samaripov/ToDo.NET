@@ -26,8 +26,8 @@ tbody .hoverable {
 }
 
 .abbreviate_text {
+    min-width: 15rem;
     max-width: 15rem;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }

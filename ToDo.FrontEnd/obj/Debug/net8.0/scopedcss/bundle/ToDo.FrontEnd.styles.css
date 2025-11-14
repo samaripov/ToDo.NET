@@ -46,8 +46,8 @@ tbody .hoverable[b-mvnsz3w1oo] {
 }
 
 .abbreviate_text[b-mvnsz3w1oo] {
+    min-width: 15rem;
     max-width: 15rem;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
