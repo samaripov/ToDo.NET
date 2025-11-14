@@ -5,6 +5,7 @@ namespace ToDo.FrontEnd.Models;
 
 public class Task
 {
+  [Key]
   public int Id { get; set; }
   [MinLength(2, ErrorMessage = "Title must be at least 3 characters long.")]
   public required string Title { get; set; }

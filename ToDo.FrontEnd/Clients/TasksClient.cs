@@ -16,6 +16,7 @@ public class TasksClient
       Title = "Make bed",
       Description = "It's messy",
       Complete = true,
+      CompletedAt = DateTime.Now,
       Priority = "Medium"
     },
     new() {
