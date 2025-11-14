@@ -1,12 +1,13 @@
-﻿@page "/edittask"
+﻿@page "/task_form/new"
+@page "/task_form/{Task_Id:int}"
 @inject NavigationManager NavigationManager
 @inject TasksClient TasksClient
 
-<PageTitle>New Task</PageTitle>
+<PageTitle>@pageTitle</PageTitle>
 
 <div class="row px-4 justify-content-center">
   <div class="col-md-3 center">
-    <h3>New Task</h3> 
+    <h3>@pageTitle</h3> 
     <EditForm Model="@task" FormName="editTask" OnValidSubmit="HandleSubmit">
       <DataAnnotationsValidator />
       <div class="mb-3">
@@ -18,7 +19,11 @@
           class="form-control bg-dark text-white" />
       </div>
       <div class="mb-3">
-        <InputSelect id="priority" @bind-Value="task.Priority" class="form-select bg-dark text-white">
+        <InputSelect 
+          id="priority" 
+          @bind-Value="task.Priority" 
+          class="form-select bg-dark text-white"
+        >
           <option value="">Select a priority</option>
           <option class="bg-danger" value="High">High</option>
           <option class="bg-warning" value="Medium">Medium</option>
@@ -28,24 +33,36 @@
       </div>
       <div class="d-flex flex-row gap-1">
         <a class="btn btn-danger w-25" role="button" href="/">Cancel</a>
-        <button type="submit" class="btn btn-success w-75">Add Task</button>
+        <button type="submit" class="btn btn-success w-75">@(Task_Id.HasValue ? "Update Task" : "Add Task")</button>
       </div>
     </EditForm>
   </div>
 </div>
 @code {
+  [Parameter]
+  public int? Task_Id { get; set; }
+
   [SupplyParameterFromForm]
   private Models.Task task { get; set; } = new()
   {
     Title = "",
     Priority = ""
   };
-
   private List<Models.Task>? tasks;
+  private string pageTitle;
 
   protected override void OnInitialized()
   {
+    pageTitle = Task_Id.HasValue ? "Edit Task" : "New Task";
     tasks = TasksClient.GetTasks();
+    if (Task_Id.HasValue) {
+      var existingTask = TasksClient.GetTaskById(Task_Id.Value);
+      if (existingTask is not null) {
+        task = existingTask;
+      } else {
+        NavigationManager.NavigateTo("/");
+      }
+    }
   }
 
   private void HandleSubmit() 

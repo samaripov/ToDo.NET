@@ -12,7 +12,7 @@
     <button @onclick="ToggleComplete" class="btn @(task.Complete ? "bg-success" : "bg-secondary") text-white w-100 mb-1">
        @(task.Complete ? "Completed "+task.CompletedAt.Humanize() : "Awaiting")
     </button>
-    <button class="btn bg-warning text-white w-100 mb-1">Edit</button>
+    <a href="task_form/@(task.Id)" class="btn bg-warning text-white w-100 mb-1">Edit</a>
     <button @onclick="HandleTaskDeletion" class="btn bg-danger text-white w-100">Delete</button>
   </td>
 </tr>

@@ -58,7 +58,9 @@ public class TasksClient
     }
     return 1;
   }
-
+  public Models.Task GetTaskById(int taskId) {
+    return tasks.Find(task => task.Id == taskId);
+  }
   public Task DeleteTask(int taskId) {
     tasks.RemoveAll(t => t.Id == taskId);
     return System.Threading.Tasks.Task.CompletedTask;
