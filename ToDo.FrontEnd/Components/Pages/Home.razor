@@ -5,35 +5,41 @@
 <div class="row px-4 justify-content-center">
   <div class="px-3 col-md-6 center">
   <PageTitle>Todo List</PageTitle>
-    <table class="table table-bordered table-dark">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col" class="bg-primary">Task ID</th>
-          <th scope="col" class="bg-primary">Title</th>
-          <th scope="col" class="bg-primary">Description</th>
-          <th scope="col" class="bg-primary">Priority</th>
-          <th scope="col" class="bg-primary">Created At</th>
-          <th scope="col" class="bg-primary">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @if(tasks is null) {
-          <p>Loading...</p>
-        } else {
-          @foreach (var task in tasks)
-          {
-            <TaskView
-              task="@task"
-            />
-          }
+  <button @onclick="sortTasks" class="btn bg-primary text-white mb-1">@(reverseByPriority ? "Low to High Priority" : "High to Low Priority")</button>
+  <table class="table table-bordered table-dark">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" class="bg-primary">Task ID</th>
+        <th scope="col" class="bg-primary">Title</th>
+        <th scope="col" class="bg-primary">Description</th>
+        <th scope="col" class="bg-primary">Priority</th>
+        <th scope="col" class="bg-primary">Created At</th>
+        <th scope="col" class="bg-primary">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if(tasks is null) {
+        <p>Loading...</p>
+      } else {
+        @foreach (var task in tasks)
+        {
+          <TaskView
+            task="@task"
+          />
         }
-      </tbody>
-    </table>
+      }
+    </tbody>
+  </table>
   </div>
 </div>
 
 @code {
     private List<Models.Task>? tasks;
+    private bool reverseByPriority = false;
+    private void sortTasks() {
+      reverseByPriority = !reverseByPriority;
+      tasks = Client.GetTasksByPriority(reverseByPriority);
+    }
 
     protected override void OnInitialized()
     {
