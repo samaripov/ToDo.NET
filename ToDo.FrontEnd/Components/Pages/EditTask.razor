@@ -1,5 +1,6 @@
 ﻿@page "/edittask"
 @inject NavigationManager NavigationManager
+@inject TasksClient TasksClient
 
 <PageTitle>New Task</PageTitle>
 
@@ -37,17 +38,16 @@
     Title = ""
   };
 
-  private TasksClient tasksClient = new TasksClient();
   private List<Models.Task>? tasks;
 
   protected override void OnInitialized()
   {
-    tasks = tasksClient.GetTasks();
+    tasks = TasksClient.GetTasks();
   }
 
   private void HandleSubmit() 
   {
-    tasksClient.AddTask(task);
+    TasksClient.AddTask(task);
     NavigationManager.NavigateTo("/");
   }
 }

@@ -34,8 +34,5 @@ public class TasksClient
     ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Priority);
     taskToAdd.Id = tasks.Count > 0 ? tasks.Count + 1 : 1;
     tasks.Add(taskToAdd);
-    foreach (var task in tasks) {
-      Console.WriteLine(task.ToString());
-    }
   }
 }
