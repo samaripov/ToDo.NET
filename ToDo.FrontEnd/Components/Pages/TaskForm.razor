@@ -19,9 +19,10 @@
           class="form-control bg-dark text-white" />
       </div>
       <div class="mb-3">
+      <p>@task.Priority.Value</p>
         <InputSelect 
           id="priority" 
-          @bind-Value="task_priority" 
+          @bind-Value="task.Priority.Value" 
           class="form-select bg-dark text-white"
         >
           <option value="">Select a priority</option>
@@ -43,36 +44,38 @@
   public int? Task_Id { get; set; }
 
   [SupplyParameterFromForm]
-  private Models.Task task { get; set; } = new()
-  {
-    Title = "",
-    Priority = new Priority{Value=""}
-  };
-  private string task_priority;
+  private Models.Task task { get; set; }
+  private Models.Priority task_priority;
   private string pageTitle;
+
   protected override void OnParametersSet()
-  {
+  { 
+    if(task is not null) {
+      return;
+    } 
     if (Task_Id.HasValue) {
       var existingTask = TasksClient.GetTaskById(Task_Id.Value);
       if (existingTask is not null) {
         task = existingTask;
-        task_priority = task.Priority.Value;
-      } else {
-        NavigationManager.NavigateTo("/");
-      }
-    }
+        task.Id = Task_Id.Value;
+        pageTitle = "Edit Task";
   }
-  protected override void OnInitialized()
-  {
-    pageTitle = Task_Id.HasValue ? "Edit Task" : "New Task";
+    } else {
+      pageTitle = "New Task";
+      task = new()
+          {
+            Title = "",
+            Priority = new Priority{Value="High"}
+          };
+    }
   }
 
   private void HandleSubmit() 
   {
-    if (Task_Id.HasValue) {
-      TasksClient.UpdateTask(task);
-    } else {
+    if (Task_Id is null) {
       TasksClient.AddTask(task);
+    } else {
+      TasksClient.UpdateTask(task);
     }
     NavigationManager.NavigateTo("/");
   }

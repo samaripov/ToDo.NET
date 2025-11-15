@@ -42,14 +42,18 @@ public class TasksClient
     tasks.Add(taskToAdd);
   }
 
-  public bool UpdateTask(Models.Task taskToUpdate) 
+  public void UpdateTask(Models.Task taskToUpdate) 
   {
-    ArgumentException.ThrowIfNullOrWhiteSpace(taskToUpdate.Title);
-    ArgumentException.ThrowIfNullOrWhiteSpace(taskToUpdate.Priority.Value);
-    var i = tasks.FindIndex(t => t.Id == taskToUpdate.Id);
-    if (i < 0) return false;
-    tasks[i] = taskToUpdate;
-    return true;
+    var existingTask = GetTaskById(taskToUpdate.Id+1);
+    Console.WriteLine(existingTask);
+    if (existingTask != null)
+    {
+      existingTask.Title = taskToUpdate.Title;
+      existingTask.Description = taskToUpdate.Description;
+      existingTask.Priority.Value = taskToUpdate.Priority.Value;
+      existingTask.Complete = taskToUpdate.Complete;
+      existingTask.CompletedAt = taskToUpdate.CompletedAt;
+    }
   }
 
   public List<Models.Task> GetTasksByPriority(Boolean reverse = false)
@@ -85,18 +89,7 @@ public class TasksClient
     return "Low";
   }
   public Models.Task? GetTaskById(int taskId) {
-    var task = tasks.Find(task => task.Id == taskId);
-    if (task == null) 
-    {
-        return null;
-    }
-    return new Models.Task
-    {
-      Id = task.Id,
-      Title = task.Title,
-      Description = task.Description,
-      Priority = task.Priority
-    };
+    return tasks.Find(task => task.Id == taskId);
   }
   public Task DeleteTask(int taskId) {
     tasks.RemoveAll(t => t.Id == taskId);
