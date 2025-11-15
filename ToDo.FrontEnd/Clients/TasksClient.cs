@@ -44,8 +44,7 @@ public class TasksClient
 
   public void UpdateTask(Models.Task taskToUpdate) 
   {
-    var existingTask = GetTaskById(taskToUpdate.Id+1);
-    Console.WriteLine(existingTask);
+    var existingTask = GetTaskById(taskToUpdate.Id);
     if (existingTask != null)
     {
       existingTask.Title = taskToUpdate.Title;
