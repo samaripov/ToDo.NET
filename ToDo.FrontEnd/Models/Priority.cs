@@ -5,6 +5,6 @@ namespace ToDo.FrontEnd.Models;
 
 public class Priority
 {
-  [Required(ErrorMessage = "Please select a priority.")]
+  [Required(AllowEmptyStrings = false, ErrorMessage = "Please select a priority.")]
   public required string Value { get; set; }
 }

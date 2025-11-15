@@ -20,17 +20,17 @@
           class="form-control bg-dark text-white" />
       </div>
       <div class="mb-3">
+        <label for="priority">Priority</label>
         <InputSelect 
           id="priority" 
           @bind-Value="task.Priority.Value" 
           class="form-select bg-dark text-white"
         >
-          <option value="">Select a priority</option>
           <option class="bg-danger" value="High">High</option>
           <option class="bg-warning" value="Medium">Medium</option>
           <option class="bg-success" value="Low">Low</option>
         </InputSelect>
-        <ValidationMessage For="() => task.Priority"/>
+        <ValidationMessage For="() => task.Priority.Value"/>
       </div>
       <div class="d-flex flex-row gap-1">
         <a class="btn btn-danger w-25" role="button" href="/">Cancel</a>
@@ -43,8 +43,7 @@
   [Parameter]
   public int? Task_Id { get; set; }
 
-  [SupplyParameterFromForm]
-  private Models.Task task { get; set; }
+  private Models.Task? task { get; set; }
   private Models.Priority task_priority;
   private string pageTitle;
 
@@ -54,28 +53,27 @@
       return;
     } 
     if (Task_Id.HasValue) {
-      var existingTask = TasksClient.GetTaskById(Task_Id.Value);
-      if (existingTask is not null) {
-        task = existingTask;
-        task.Id = Task_Id.Value;
-        pageTitle = "Edit Task";
-  }
+      task = TasksClient.GetTaskById(Task_Id.Value);;
+      task.Id = Task_Id.Value;
+      pageTitle = "Edit Task";
     } else {
       pageTitle = "New Task";
       task = new()
-          {
-            Title = "",
-            Priority = new Priority{Value="High"}
-          };
+      {
+        Title = "",
+        Priority = new Models.Priority{Value="High"}
+      };
     }
   }
 
   private void HandleSubmit() 
   {
-    if (Task_Id is null) {
-      TasksClient.AddTask(task);
-    } else {
-      TasksClient.UpdateTask(task);
+    if (task is not null) {
+      if (Task_Id is null) {
+        TasksClient.AddTask(task);
+      } else {
+        TasksClient.UpdateTask(task);
+      }
     }
     NavigationManager.NavigateTo("/");
   }
