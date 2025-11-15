@@ -2,6 +2,7 @@
 @page "/task_form/{Task_Id:int}"
 @inject NavigationManager NavigationManager
 @inject TasksClient TasksClient
+@rendermode InteractiveServer
 
 <PageTitle>@pageTitle</PageTitle>
 
@@ -19,7 +20,6 @@
           class="form-control bg-dark text-white" />
       </div>
       <div class="mb-3">
-      <p>@task.Priority.Value</p>
         <InputSelect 
           id="priority" 
           @bind-Value="task.Priority.Value" 
@@ -65,7 +65,7 @@
       task = new()
           {
             Title = "",
-            Priority = new Priority{Value="High"}
+            Priority = new Priority{Value=""}
           };
     }
   }
