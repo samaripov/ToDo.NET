@@ -2,37 +2,42 @@ namespace ToDo.FrontEnd.Clients;
 
 public class TasksClient
 {
-  private readonly List<Models.Task> tasks =
-  [
-  new() {
+  private readonly List<Models.Task> tasks = new List<Models.Task> {
+  new Models.Task {
       Id = 1,
       Title = "Clean the dishes",
       Description = "The sink is way too full. A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dog",
       Complete = false,
-      Priority = "High"
+      Priority = new Models.Priority{
+        Value = "High"
+      }
     },
-    new() {
+    new Models.Task {
       Id = 2,
       Title = "Make bed",
       Description = "It's messy",
       Complete = true,
       CompletedAt = DateTime.Now,
-      Priority = "Medium"
+      Priority = new Models.Priority{
+        Value = "Medium"
+      }
     },
-    new() {
+    new Models.Task {
       Id = 3,
       Title = "Finish work",
       Complete = false,
-      Priority = "Low"
+      Priority = new Models.Priority{
+        Value = "Low"
+      }
     }
-  ];
+  };
 
   public List<Models.Task> GetTasks() => tasks;
 
   public void AddTask(Models.Task taskToAdd) 
   {
     ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Title);
-    ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Priority);
+    ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Priority.Value);
     taskToAdd.Id = tasks.Count > 0 ? tasks.Count + 1 : 1;
     tasks.Add(taskToAdd);
   }
@@ -40,7 +45,7 @@ public class TasksClient
   public bool UpdateTask(Models.Task taskToUpdate) 
   {
     ArgumentException.ThrowIfNullOrWhiteSpace(taskToUpdate.Title);
-    ArgumentException.ThrowIfNullOrWhiteSpace(taskToUpdate.Priority);
+    ArgumentException.ThrowIfNullOrWhiteSpace(taskToUpdate.Priority.Value);
     var i = tasks.FindIndex(t => t.Id == taskToUpdate.Id);
     if (i < 0) return false;
     tasks[i] = taskToUpdate;
@@ -49,7 +54,7 @@ public class TasksClient
 
   public List<Models.Task> GetTasksByPriority(Boolean reverse = false)
   {
-    var sortedTasks = tasks.OrderBy(task => convertPriorityToInt(task.Priority));
+    var sortedTasks = tasks.OrderBy(task => convertPriorityToInt(task.Priority.Value));
     if (reverse)
     {
       return sortedTasks.Reverse().ToList();
@@ -57,7 +62,7 @@ public class TasksClient
     return sortedTasks.ToList();
   }
 
-  private int convertPriorityToInt(String priorityString)
+  public int convertPriorityToInt(String priorityString)
   {
     switch(priorityString)
     {
@@ -68,8 +73,23 @@ public class TasksClient
     }
     return 1;
   }
+  public string convertIntToPriority(int priorityInt)
+  {
+    switch(priorityInt)
+    {
+      case 1:
+        return "High";
+      case 2:
+        return "Medium";
+    }
+    return "Low";
+  }
   public Models.Task? GetTaskById(int taskId) {
     var task = tasks.Find(task => task.Id == taskId);
+    if (task == null) 
+    {
+        return null;
+    }
     return new Models.Task
     {
       Id = task.Id,

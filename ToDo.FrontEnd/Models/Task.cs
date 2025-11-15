@@ -7,15 +7,15 @@ public class Task
 {
   [Key]
   public int Id { get; set; }
-  [MinLength(2, ErrorMessage = "Title must be at least 3 characters long.")]
+  [MinLength(2, ErrorMessage = "Title must be at least 2 characters long.")]
   public required string Title { get; set; }
   public string Description { get; set; } = string.Empty;
   public bool Complete { get; set; } = false;
   
   [Required(ErrorMessage = "Please select a priority.")]
-  public required string Priority { get; set; }
-  public readonly DateTime CreatedAt = DateTime.Now;
-  public DateTime CompletedAt { get; set; }
+  public required Models.Priority Priority { get; set; }
+  public DateTime CreatedAt { get; } = DateTime.Now;  
+  public DateTime? CompletedAt { get; set; }
 
   public override string ToString() 
   {
@@ -24,7 +24,7 @@ public class Task
             ID: {Id}
             Title: "{Title}"
             Description: "{AbbreviateDescription()}"
-            Priority: {Priority}
+            Priority: {Priority.Value}
           """;
   }
   public string AbbreviateDescription() 

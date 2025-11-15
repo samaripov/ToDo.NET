@@ -6,7 +6,7 @@
 <PageTitle>@pageTitle</PageTitle>
 
 <div class="row px-4 justify-content-center">
-  <div class="col-md-5 center">
+  <div class="col-md-7 center">
     <h3>@pageTitle</h3> 
     <EditForm Model="@task" FormName="editTask" OnValidSubmit="HandleSubmit">
       <DataAnnotationsValidator />
@@ -21,7 +21,7 @@
       <div class="mb-3">
         <InputSelect 
           id="priority" 
-          @bind-Value="task.Priority" 
+          @bind-Value="task_priority" 
           class="form-select bg-dark text-white"
         >
           <option value="">Select a priority</option>
@@ -43,29 +43,28 @@
   public int? Task_Id { get; set; }
 
   [SupplyParameterFromForm]
-  private Models.Task? task { get; set; }
-
-  private List<Models.Task>? tasks;
+  private Models.Task task { get; set; } = new()
+  {
+    Title = "",
+    Priority = new Priority{Value=""}
+  };
+  private string task_priority;
   private string pageTitle;
-
   protected override void OnParametersSet()
   {
-    if (Task_Id is not null) 
-    {
-      task = TasksClient.GetTaskById(Task_Id.Value);
-    } else {
-      task = new()
-      {
-        Title = "",
-        Priority = ""
-      };
+    if (Task_Id.HasValue) {
+      var existingTask = TasksClient.GetTaskById(Task_Id.Value);
+      if (existingTask is not null) {
+        task = existingTask;
+        task_priority = task.Priority.Value;
+      } else {
+        NavigationManager.NavigateTo("/");
+      }
     }
   }
-
   protected override void OnInitialized()
   {
     pageTitle = Task_Id.HasValue ? "Edit Task" : "New Task";
-    tasks = TasksClient.GetTasks();
   }
 
   private void HandleSubmit() 
