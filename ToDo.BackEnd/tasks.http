@@ -22,8 +22,10 @@ Content-Type: application/json
 
 {
   "title": "Wash the Dishes",
-  "description": "The sink is full m8!",
+  "description": "",
   "complete": true,
   "createdAt": "2025-11-17T15:18:03.4532118-05:00",
   "completedAt": "2025-11-17T15:18:03.4550661-05:00"
 }
+###
+DELETE http://localhost:5234/tasks/4

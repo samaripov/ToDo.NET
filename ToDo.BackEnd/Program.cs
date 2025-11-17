@@ -78,4 +78,12 @@ app.MapPut("tasks/{id}/edit", (int id, UpdateTaskDTO updatedTask) =>
   return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, tasks[taskIndex]);
 });
 
+//DELETE /tasks/{id}
+app.MapDelete("tasks/{id}", (int id) =>
+{
+  tasks.RemoveAll(task => task.Id == id);
+
+  return Results.Accepted();
+});
+
 app.Run();
