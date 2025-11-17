@@ -37,7 +37,15 @@ List<TaskDTO> tasks = [
 app.MapGet("tasks", () => tasks);
 
 // GET /tasks/{id}
-app.MapGet("tasks/{id}", (int id) => tasks.Find((task) => task.Id == id)).WithName(GetTaskEndpointName);
+app.MapGet("tasks/{id}", (int id) => 
+{
+  var task = tasks.Find((task) => task.Id == id);
+  if(task is null)
+  {
+    return Results.NotFound();
+  }
+  return Results.Json(task);
+}).WithName(GetTaskEndpointName);
 
 
 //POST /tasks/new
