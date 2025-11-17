@@ -34,13 +34,14 @@ public static class TaskEndpoints
     ),
   ];
 
-  public static WebApplication MapTasksEndpoints(this WebApplication app)
-  {
+  public static RouteGroupBuilder MapTasksEndpoints(this WebApplication app)
+  { 
+    var group = app.MapGroup("tasks");
     // GET /tasks
-    app.MapGet("tasks", () => tasks);
+    group.MapGet("/", () => tasks);
 
     // GET /tasks/{id}
-    app.MapGet("tasks/{id}", (int id) =>
+    group.MapGet("/{id}", (int id) =>
     {
       var task = tasks.Find((task) => task.Id == id);
       return task is null ? Results.NotFound() : Results.Ok(task);
@@ -48,7 +49,7 @@ public static class TaskEndpoints
 
 
     //POST /tasks/new
-    app.MapPost("tasks/new", (CreateTaskDTO newTask) =>
+    group.MapPost("/new", (CreateTaskDTO newTask) =>
     {
       TaskDTO task = new(
         tasks.Count + 1,
@@ -65,7 +66,7 @@ public static class TaskEndpoints
     });
 
     //PATCH /tasks/{id}/edit/
-    app.MapPut("tasks/{id}/edit", (int id, UpdateTaskDTO updatedTask) =>
+    group.MapPut("/{id}/edit", (int id, UpdateTaskDTO updatedTask) =>
     {
       var taskIndex = tasks.FindIndex((task) => task.Id == id);
 
@@ -86,11 +87,11 @@ public static class TaskEndpoints
     });
 
     //DELETE /tasks/{id}
-    app.MapDelete("tasks/{id}", (int id) =>
+    group.MapDelete("/{id}", (int id) =>
     {
       var task = tasks.RemoveAll(task => task.Id == id);
       return task == 0 ? Results.NotFound() : Results.Accepted();
     });
-    return app;
+    return group;
   }
 }
