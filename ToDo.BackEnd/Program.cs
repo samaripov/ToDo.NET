@@ -4,6 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 
+const string GetTaskEndpointName = "GetTask";
+
 List<TaskDTO> tasks = [
   new (
     1,
@@ -33,4 +35,24 @@ List<TaskDTO> tasks = [
 // GET /tasks
 app.MapGet("tasks", () => tasks);
 
+// GET /tasks/1
+app.MapGet("tasks/{id}", (int id) => tasks.Find((task) => task.Id == id)).WithName(GetTaskEndpointName);
+
+
+//POST /tasks
+app.MapPost("tasks/new", (CreateTaskDTO newTask) =>
+{
+  TaskDTO task = new(
+    tasks.Count + 1,
+    newTask.Title,
+    newTask.Description,
+    newTask.Complete,
+    newTask.CreatedAt,
+    newTask.CompletedAt
+  );
+
+  tasks.Add(task);
+
+  return Results.CreatedAtRoute(GetTaskEndpointName, new { id = task.Id }, task);
+});
 app.Run();
