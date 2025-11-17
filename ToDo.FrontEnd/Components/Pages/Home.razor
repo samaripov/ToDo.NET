@@ -2,11 +2,11 @@
 @inject TasksClient Client
 @rendermode InteractiveServer
 
-<div class="row px-4 justify-content-center">
-  <div class="px-3  center">
+<div class="d-flex justify-content-center">
+  <div class="col-md-7">
   <PageTitle>Todo List</PageTitle>
   <button @onclick="sortTasks" class="btn bg-primary text-white mb-1">@(reverseByPriority ? "Low to High Priority" : "High to Low Priority")</button>
-  <table class="table table-bordered table-dark">
+  <table class="table table-bordered table-dark ">
     <thead class="thead-dark">
       <tr>
         <th scope="col" class="bg-primary text-center w-25 align-middle">Title</th>

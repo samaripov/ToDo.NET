@@ -1,8 +1,10 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.FrontEnd", "ToDo.FrontEnd\ToDo.FrontEnd.csproj", "{0A5FAD9A-6AC5-F230-19CF-E8A3369562AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.BackEnd", "ToDo.BackEnd\ToDo.BackEnd.csproj", "{CDC84264-7671-4BF3-869A-D519B0D65D2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +16,10 @@ Global
 		{0A5FAD9A-6AC5-F230-19CF-E8A3369562AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A5FAD9A-6AC5-F230-19CF-E8A3369562AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A5FAD9A-6AC5-F230-19CF-E8A3369562AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC84264-7671-4BF3-869A-D519B0D65D2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC84264-7671-4BF3-869A-D519B0D65D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC84264-7671-4BF3-869A-D519B0D65D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC84264-7671-4BF3-869A-D519B0D65D2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
