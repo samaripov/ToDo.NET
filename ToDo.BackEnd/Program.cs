@@ -1,3 +1,4 @@
+using ToDo.BackEnd;
 using ToDo.BackEnd.DataTransferObjects;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,11 +36,11 @@ List<TaskDTO> tasks = [
 // GET /tasks
 app.MapGet("tasks", () => tasks);
 
-// GET /tasks/1
+// GET /tasks/{id}
 app.MapGet("tasks/{id}", (int id) => tasks.Find((task) => task.Id == id)).WithName(GetTaskEndpointName);
 
 
-//POST /tasks
+//POST /tasks/new
 app.MapPost("tasks/new", (CreateTaskDTO newTask) =>
 {
   TaskDTO task = new(
@@ -55,4 +56,26 @@ app.MapPost("tasks/new", (CreateTaskDTO newTask) =>
 
   return Results.CreatedAtRoute(GetTaskEndpointName, new { id = task.Id }, task);
 });
+
+//PATCH /tasks/{id}/edit/
+app.MapPut("tasks/{id}/edit", (int id, UpdateTaskDTO updatedTask) =>
+{ 
+  var taskIndex = tasks.FindIndex((task) => task.Id == id);
+
+  if (taskIndex == -1)
+  {
+    return Results.NotFound();
+  }
+
+  tasks[taskIndex] = new TaskDTO (
+    id,
+    updatedTask.Title,
+    updatedTask.Description,
+    updatedTask.Complete,
+    updatedTask.CreatedAt,
+    updatedTask.CompletedAt
+  );
+  return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, tasks[taskIndex]);
+});
+
 app.Run();
