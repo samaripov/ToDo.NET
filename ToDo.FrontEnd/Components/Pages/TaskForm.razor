@@ -26,6 +26,7 @@
           @bind-Value="task.Priority.Value" 
           class="form-select bg-dark text-white"
         >
+          <option value="">Select an Option</option>
           <option class="bg-danger" value="High">High</option>
           <option class="bg-warning" value="Medium">Medium</option>
           <option class="bg-success" value="Low">Low</option>
@@ -44,7 +45,6 @@
   public int? Task_Id { get; set; }
 
   private Models.Task? task { get; set; }
-  private Models.Priority task_priority;
   private string pageTitle;
 
   protected override void OnParametersSet()
@@ -61,20 +61,21 @@
       task = new()
       {
         Title = "",
-        Priority = new Models.Priority{Value="High"}
+        Priority = new Models.Priority{Value=""}
       };
     }
   }
 
   private void HandleSubmit() 
   {
-    if (task is not null) {
+    if (task is not null && task.Priority.Value != "") {
       if (Task_Id is null) {
         TasksClient.AddTask(task);
+        NavigationManager.NavigateTo("/");
       } else {
         TasksClient.UpdateTask(task);
+        NavigationManager.NavigateTo("/");
       }
     }
-    NavigationManager.NavigateTo("/");
   }
 }

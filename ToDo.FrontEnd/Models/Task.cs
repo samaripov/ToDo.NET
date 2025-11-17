@@ -12,7 +12,8 @@ public class Task
   public string Description { get; set; } = string.Empty;
   public bool Complete { get; set; } = false;
   
-  [Required(ErrorMessage = "Please select a priority.")]
+  [Required(ErrorMessage = "A priority is required.")]
+  [MinLength(1, ErrorMessage = "Please select a priority.")]
   public required Models.Priority Priority { get; set; }
   public DateTime CreatedAt { get; } = DateTime.Now;  
   public DateTime? CompletedAt { get; set; }
