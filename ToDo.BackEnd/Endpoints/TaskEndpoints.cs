@@ -36,7 +36,7 @@ public static class TaskEndpoints
 
   public static RouteGroupBuilder MapTasksEndpoints(this WebApplication app)
   { 
-    var group = app.MapGroup("tasks");
+    var group = app.MapGroup("tasks").WithParameterValidation();
     // GET /tasks
     group.MapGet("/", () => tasks);
 
@@ -63,7 +63,7 @@ public static class TaskEndpoints
       tasks.Add(task);
 
       return Results.CreatedAtRoute(GetTaskEndpointName, new { id = task.Id }, task);
-    }).WithParameterValidation();
+    });
 
     //PUT /tasks/{id}/edit/
     group.MapPut("/{id}/edit", (int id, UpdateTaskDTO updatedTask) =>
@@ -84,7 +84,7 @@ public static class TaskEndpoints
         updatedTask.CompletedAt
       );
       return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, tasks[taskIndex]);
-    }).WithParameterValidation();
+    });
 
     //DELETE /tasks/{id}
     group.MapDelete("/{id}", (int id) =>
