@@ -63,9 +63,9 @@ public static class TaskEndpoints
       tasks.Add(task);
 
       return Results.CreatedAtRoute(GetTaskEndpointName, new { id = task.Id }, task);
-    });
+    }).WithParameterValidation();
 
-    //PATCH /tasks/{id}/edit/
+    //PUT /tasks/{id}/edit/
     group.MapPut("/{id}/edit", (int id, UpdateTaskDTO updatedTask) =>
     {
       var taskIndex = tasks.FindIndex((task) => task.Id == id);
@@ -84,7 +84,7 @@ public static class TaskEndpoints
         updatedTask.CompletedAt
       );
       return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, tasks[taskIndex]);
-    });
+    }).WithParameterValidation();
 
     //DELETE /tasks/{id}
     group.MapDelete("/{id}", (int id) =>

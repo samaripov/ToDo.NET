@@ -1,9 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ToDo.BackEnd.DataTransferObjects;
 
 public record class CreateTaskDTO(
-  string Title,
+  [Required][MaxLength(50)] string Title,
   string Description,
-  bool Complete,
-  DateTime CreatedAt,
-  DateTime CompletedAt
+  [Required] bool Complete,
+  [Required] DateTime CreatedAt,
+  [Required] DateTime CompletedAt
 );

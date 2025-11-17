@@ -10,7 +10,6 @@ POST http://localhost:5234/tasks/new
 Content-Type: application/json
 
 {
-  "title": "Cook dinner",
   "description": "I was thinking pizza",
   "complete": false,
   "createdAt": "2025-11-17T15:04:57.074668-05:00",
@@ -21,7 +20,6 @@ PUT http://localhost:5234/tasks/2/edit
 Content-Type: application/json
 
 {
-  "title": "Wash the Dishes",
   "description": "",
   "complete": true,
   "createdAt": "2025-11-17T15:18:03.4532118-05:00",

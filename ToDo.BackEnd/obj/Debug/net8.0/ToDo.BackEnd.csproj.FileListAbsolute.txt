@@ -24,3 +24,9 @@ C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.BackEnd\obj\Debug\net8.
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.BackEnd\obj\Debug\net8.0\ToDo.BackEnd.pdb
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.BackEnd\obj\Debug\net8.0\ToDo.BackEnd.genruntimeconfig.cache
 C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.BackEnd\obj\Debug\net8.0\ref\ToDo.BackEnd.dll
+C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.BackEnd\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.BackEnd\bin\Debug\net8.0\MinimalApis.Extensions.dll
+C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.BackEnd\bin\Debug\net8.0\MiniValidation.dll
+C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.BackEnd\obj\Debug\net8.0\ToDo.BackEnd.csproj.AssemblyReference.cache
+C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.BackEnd\obj\Debug\net8.0\ToDo.BackEnd.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\aripo\OneDrive\Desktop\BlazorProjects\ToDo\ToDo.BackEnd\obj\Debug\net8.0\ToDo.Bac.684263A2.Up2Date
