@@ -28,4 +28,4 @@ Content-Type: application/json
   "completedAt": "2025-11-17T15:18:03.4550661-05:00"
 }
 ###
-DELETE http://localhost:5234/tasks/4
+DELETE http://localhost:5234/tasks/40

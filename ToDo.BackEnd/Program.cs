@@ -40,11 +40,7 @@ app.MapGet("tasks", () => tasks);
 app.MapGet("tasks/{id}", (int id) => 
 {
   var task = tasks.Find((task) => task.Id == id);
-  if(task is null)
-  {
-    return Results.NotFound();
-  }
-  return Results.Json(task);
+  return task is null ? Results.NotFound() : Results.Ok(task);
 }).WithName(GetTaskEndpointName);
 
 
@@ -89,9 +85,8 @@ app.MapPut("tasks/{id}/edit", (int id, UpdateTaskDTO updatedTask) =>
 //DELETE /tasks/{id}
 app.MapDelete("tasks/{id}", (int id) =>
 {
-  tasks.RemoveAll(task => task.Id == id);
-
-  return Results.Accepted();
+  var task = tasks.RemoveAll(task => task.Id == id);
+  return task == 0 ? Results.NotFound() : Results.Accepted();
 });
 
 app.Run();
