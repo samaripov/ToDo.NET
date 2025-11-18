@@ -10,6 +10,6 @@ public class Task
   public bool Complete { get; set; } = false;
   public required string Priority { get; set; }
   public required int PriorityId { get; set; }
-  public DateTime CreatedAt { get; } = DateTime.Now;  
+  public required DateTime CreatedAt { get; set; }  
   public DateTime CompletedAt { get; set; }
 }

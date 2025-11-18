@@ -14,6 +14,7 @@ public static class TaskMapping
         Priority = "",
         PriorityId = task.PriorityId,
         Complete = task.Complete,
+        CreatedAt = DateTime.Now,
         CompletedAt = task.CompletedAt
       };
   }
@@ -28,6 +29,7 @@ public static class TaskMapping
         Priority = "",
         PriorityId = task.PriorityId,
         Complete = task.Complete,
+        CreatedAt = DateTime.Now,
         CompletedAt = task.CompletedAt
       };
   }

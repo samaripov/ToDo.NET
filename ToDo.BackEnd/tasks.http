@@ -13,12 +13,12 @@ Content-Type: application/json
   "title": "Cook dinner",
   "description": "I was thinking pizza",
   "PriorityId": "1",
-  "complete": false,
+  "complete": true,
   "createdAt": "2025-11-17T15:04:57.074668-05:00",
   "completedAt": "2025-11-17T15:04:57.0746681-05:00"
 }
 ###
-PUT http://localhost:5234/tasks/8/edit
+PUT http://localhost:5234/tasks/2/edit
 Content-Type: application/json
 
 {
