@@ -18,11 +18,10 @@ Content-Type: application/json
   "completedAt": "2025-11-17T15:04:57.0746681-05:00"
 }
 ###
-PUT http://localhost:5234/tasks/6/edit
+PUT http://localhost:5234/tasks/8/edit
 Content-Type: application/json
 
 {
-  "id": "1",
   "title": "Wash the Dishes",
   "description": "",
   "PriorityId": "2",

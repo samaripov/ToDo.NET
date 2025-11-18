@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ToDo.BackEnd;
 
 public record class UpdateTaskDTO(
+  [Required] int Id,
   [Required][StringLength(50)] string Title,
   string Description,
   [Required] int PriorityId,

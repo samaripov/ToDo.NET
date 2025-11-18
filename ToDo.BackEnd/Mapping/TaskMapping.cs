@@ -18,6 +18,20 @@ public static class TaskMapping
       };
   }
 
+  public static Entities.Task ToEntity(this UpdateTaskDTO task, int id)
+  {
+    return new Entities.Task()
+      {
+        Id = id,
+        Title = task.Title,
+        Description = task.Description,
+        Priority = "",
+        PriorityId = task.PriorityId,
+        Complete = task.Complete,
+        CompletedAt = task.CompletedAt
+      };
+  }
+  
   public static TaskDetailsDTO ToDetailsDTO(this Entities.Task task)
   {
     return new TaskDetailsDTO(
