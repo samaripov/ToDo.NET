@@ -63,10 +63,12 @@ public static class TaskEndpoints
       {
         return Results.UnprocessableEntity();
       }
-    
+      var updatedTaskEntity = updatedTask.ToEntity(id);
+      updatedTaskEntity.Priority = priority.Value;
+
       dbContext.Entry(existingTask)
         .CurrentValues
-        .SetValues(updatedTask.ToEntity(id));
+        .SetValues(updatedTaskEntity);
 
       dbContext.SaveChanges();
       return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, existingTask.ToSummaryDTO());
