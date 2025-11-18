@@ -12,5 +12,7 @@ builder.Services.AddSqlite<TaskStoreContext>(connectionString);
 var app = builder.Build();
 
 app.MapTasksEndpoints();
+app.MapPrioritiesEndpoints();
+
 await app.MigrateDBAsync();
 app.Run();
