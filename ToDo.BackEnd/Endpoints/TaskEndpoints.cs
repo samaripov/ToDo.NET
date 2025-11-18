@@ -79,25 +79,30 @@ public static class TaskEndpoints
     });
 
     //PUT /tasks/{id}/edit/
-    group.MapPut("/{id}/edit", (int id, UpdateTaskDTO updatedTask) =>
+    group.MapPut("/{id}/edit", (int id, UpdateTaskDTO updatedTask, TaskStoreContext dbContext) =>
     {
-      var taskIndex = tasks.FindIndex((task) => task.Id == id);
+      var task = dbContext.Tasks.Find(id);
 
-      if (taskIndex == -1)
+      if (task is null)
       {
         return Results.NotFound();
       }
 
-      tasks[taskIndex] = new TaskDTO(
-        id,
-        updatedTask.Title,
-        updatedTask.Description,
-        updatedTask.PriorityId,
-        updatedTask.Complete,
-        updatedTask.CreatedAt,
-        updatedTask.CompletedAt
-      );
-      return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, tasks[taskIndex]);
+      var priority = dbContext.Priorities.Find(updatedTask.PriorityId);
+      if (priority is null)
+      {
+        return Results.UnprocessableEntity();
+      }
+    
+      task.Title = updatedTask.Title;
+      task.Description = updatedTask.Description;
+      task.PriorityId = updatedTask.PriorityId;
+      task.Priority = priority.Value;
+      task.Complete = updatedTask.Complete;
+      task.CompletedAt = updatedTask.CompletedAt;
+
+      dbContext.SaveChanges();
+      return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, task);
     });
 
     //DELETE /tasks/{id}
