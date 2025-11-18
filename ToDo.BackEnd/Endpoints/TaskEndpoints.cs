@@ -1,4 +1,5 @@
 using System;
+using Microsoft.EntityFrameworkCore;
 using ToDo.BackEnd.Data;
 using ToDo.BackEnd.DataTransferObjects;
 
@@ -108,14 +109,8 @@ public static class TaskEndpoints
     //DELETE /tasks/{id}
     group.MapDelete("/{id}", (int id, TaskStoreContext dbContext) =>
     {
-      var task = dbContext.Tasks.Find(id);
-      if (task is null)
-      {
-        return Results.NotFound();
-      }
-      dbContext.Tasks.Remove(task);
-      dbContext.SaveChanges();
-      return Results.Accepted();
+      dbContext.Tasks.Where((task) => task.Id == id).ExecuteDelete();
+      return Results.NoContent();
     });
     return group;
   }
