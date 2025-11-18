@@ -6,7 +6,7 @@ namespace ToDo.BackEnd.Data;
 public class TaskStoreContext(DbContextOptions<TaskStoreContext> options) : DbContext(options)
 {
   public DbSet<Entities.Task> Tasks => Set<Entities.Task>();
-
+  public DbSet<Entities.Priority> Priorities => Set<Entities.Priority>();
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);

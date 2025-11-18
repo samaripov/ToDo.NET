@@ -2,7 +2,7 @@ GET http://localhost:5234/tasks
 ###
 GET http://localhost:5234/tasks/1
 ###
-GET http://localhost:5234/tasks/2
+GET http://localhost:5234/tasks/4
 ###
 GET http://localhost:5234/tasks/40
 ###
@@ -12,6 +12,7 @@ Content-Type: application/json
 {
   "title": "Cook dinner",
   "description": "I was thinking pizza",
+  "PriorityId": "1",
   "complete": false,
   "createdAt": "2025-11-17T15:04:57.074668-05:00",
   "completedAt": "2025-11-17T15:04:57.0746681-05:00"
@@ -23,6 +24,7 @@ Content-Type: application/json
 {
   "title": "Wash the Dishes",
   "description": "",
+  "PriorityId": "2",
   "complete": true,
   "createdAt": "2025-11-17T15:18:03.4532118-05:00",
   "completedAt": "2025-11-17T15:18:03.4550661-05:00"

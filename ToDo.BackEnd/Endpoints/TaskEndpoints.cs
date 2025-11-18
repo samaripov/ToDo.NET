@@ -1,4 +1,5 @@
 using System;
+using ToDo.BackEnd.Data;
 using ToDo.BackEnd.DataTransferObjects;
 
 namespace ToDo.BackEnd.Endpoints;
@@ -12,6 +13,7 @@ public static class TaskEndpoints
       1,
       "Dishes",
       "Wash the dishes",
+      1,
       false,
       DateTime.Now,
       DateTime.Now
@@ -20,6 +22,7 @@ public static class TaskEndpoints
       2,
       "HW",
       "Finish homework",
+      1,
       false,
       DateTime.Now,
       DateTime.Now
@@ -28,6 +31,7 @@ public static class TaskEndpoints
       3,
       "Bathroom",
       "Wash the bathroom",
+      1,
       false,
       DateTime.Now,
       DateTime.Now
@@ -38,7 +42,7 @@ public static class TaskEndpoints
   { 
     var group = app.MapGroup("tasks").WithParameterValidation();
     // GET /tasks
-    group.MapGet("/", () => tasks);
+    group.MapGet("/", (TaskStoreContext dbContext) => dbContext.Tasks);
 
     // GET /tasks/{id}
     group.MapGet("/{id}", (int id) =>
@@ -49,18 +53,27 @@ public static class TaskEndpoints
 
 
     //POST /tasks/new
-    group.MapPost("/new", (CreateTaskDTO newTask) =>
+    group.MapPost("/new", (CreateTaskDTO newTask, TaskStoreContext dbContext) =>
     {
-      TaskDTO task = new(
-        tasks.Count + 1,
-        newTask.Title,
-        newTask.Description,
-        newTask.Complete,
-        newTask.CreatedAt,
-        newTask.CompletedAt
-      );
+      var Priority = dbContext.Priorities.Find(newTask.PriorityId);
+      
+      if (Priority is null)
+      {
+        return Results.UnprocessableEntity();
+      }
 
-      tasks.Add(task);
+      Entities.Task task = new()
+      {
+        Title = newTask.Title,
+        Description = newTask.Description,
+        Priority = Priority.Value,
+        PriorityId = newTask.PriorityId,
+        Complete = newTask.Complete,
+        CompletedAt = newTask.CompletedAt
+      };
+
+      dbContext.Tasks.Add(task);
+      dbContext.SaveChanges();
 
       return Results.CreatedAtRoute(GetTaskEndpointName, new { id = task.Id }, task);
     });
@@ -79,6 +92,7 @@ public static class TaskEndpoints
         id,
         updatedTask.Title,
         updatedTask.Description,
+        updatedTask.PriorityId,
         updatedTask.Complete,
         updatedTask.CreatedAt,
         updatedTask.CompletedAt

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDo.BackEnd.Data;
 
@@ -10,9 +11,11 @@ using ToDo.BackEnd.Data;
 namespace ToDo.BackEnd.Data.Migrations
 {
     [DbContext(typeof(TaskStoreContext))]
-    partial class TaskStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20251118202230_AddedPriorities")]
+    partial class AddedPriorities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -65,10 +68,6 @@ namespace ToDo.BackEnd.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Priority")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("PriorityId")
                         .HasColumnType("INTEGER");
 
@@ -78,7 +77,20 @@ namespace ToDo.BackEnd.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PriorityId");
+
                     b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("ToDo.BackEnd.Entities.Task", b =>
+                {
+                    b.HasOne("ToDo.BackEnd.Entities.Priority", "Priority")
+                        .WithMany()
+                        .HasForeignKey("PriorityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Priority");
                 });
 #pragma warning restore 612, 618
         }
