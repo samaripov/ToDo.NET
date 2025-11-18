@@ -15,7 +15,7 @@ public static class TaskEndpoints
       1,
       "Dishes",
       "Wash the dishes",
-      "High",
+      1,
       false,
       DateTime.Now,
       DateTime.Now
@@ -24,7 +24,7 @@ public static class TaskEndpoints
       2,
       "HW",
       "Finish homework",
-      "High",
+      1,
       false,
       DateTime.Now,
       DateTime.Now
@@ -33,7 +33,7 @@ public static class TaskEndpoints
       3,
       "Bathroom",
       "Wash the bathroom",
-      "High",
+      1,
       false,
       DateTime.Now,
       DateTime.Now
@@ -44,13 +44,18 @@ public static class TaskEndpoints
   { 
     var group = app.MapGroup("tasks").WithParameterValidation();
     // GET /tasks
-    group.MapGet("/", (TaskStoreContext dbContext) => dbContext.Tasks);
+    group.MapGet("/", (TaskStoreContext dbContext) => 
+    {
+      List<TaskDTO> taskDTOs = new List<TaskDTO>();
+      dbContext.Tasks.ForEachAsync((task) => taskDTOs.Add(task.ToDTO()));
+      return taskDTOs;  
+    });
 
     // GET /tasks/{id}
     group.MapGet("/{id}", (int id, TaskStoreContext dbContext) =>
     {
-      var task = dbContext.Tasks.Find(id);
-      return task is null ? Results.NotFound() : Results.Ok(task);
+      Entities.Task? task = dbContext.Tasks.Find(id);
+      return task is null ? Results.NotFound() : Results.Ok(task.ToDTO());
     }).WithName(GetTaskEndpointName);
 
 
@@ -97,7 +102,7 @@ public static class TaskEndpoints
       task.CompletedAt = updatedTask.CompletedAt;
 
       dbContext.SaveChanges();
-      return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, task);
+      return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, task.ToDTO());
     });
 
     //DELETE /tasks/{id}

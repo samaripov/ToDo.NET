@@ -20,10 +20,11 @@ public static class TaskMapping
 
   public static TaskDTO ToDTO(this Entities.Task task)
   {
-    return new TaskDTO(task.Id,
+    return new TaskDTO(
+      task.Id,
       task.Title,
       task.Description,
-      task.Priority,
+      task.PriorityId,
       task.Complete,
       task.CreatedAt,
       task.CompletedAt
