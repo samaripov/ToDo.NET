@@ -10,44 +10,14 @@ public static class TaskEndpoints
 {
   const string GetTaskEndpointName = "GetTask";
 
-  private static readonly List<TaskDTO> tasks = [
-    new (
-      1,
-      "Dishes",
-      "Wash the dishes",
-      1,
-      false,
-      DateTime.Now,
-      DateTime.Now
-    ),
-    new (
-      2,
-      "HW",
-      "Finish homework",
-      1,
-      false,
-      DateTime.Now,
-      DateTime.Now
-    ),
-    new (
-      3,
-      "Bathroom",
-      "Wash the bathroom",
-      1,
-      false,
-      DateTime.Now,
-      DateTime.Now
-    ),
-  ];
-
   public static RouteGroupBuilder MapTasksEndpoints(this WebApplication app)
   { 
     var group = app.MapGroup("tasks").WithParameterValidation();
     // GET /tasks
     group.MapGet("/", (TaskStoreContext dbContext) => 
     {
-      List<TaskDTO> taskDTOs = new List<TaskDTO>();
-      dbContext.Tasks.ForEachAsync((task) => taskDTOs.Add(task.ToDTO()));
+      List<TaskDetailsDTO> taskDTOs = new List<TaskDetailsDTO>();
+      dbContext.Tasks.ForEachAsync((task) => taskDTOs.Add(task.ToDetailsDTO()));
       return taskDTOs;  
     });
 
@@ -55,7 +25,7 @@ public static class TaskEndpoints
     group.MapGet("/{id}", (int id, TaskStoreContext dbContext) =>
     {
       Entities.Task? task = dbContext.Tasks.Find(id);
-      return task is null ? Results.NotFound() : Results.Ok(task.ToDTO());
+      return task is null ? Results.NotFound() : Results.Ok(task.ToDetailsDTO());
     }).WithName(GetTaskEndpointName);
 
 
@@ -75,7 +45,7 @@ public static class TaskEndpoints
       dbContext.Tasks.Add(task);
       dbContext.SaveChanges();
 
-      return Results.CreatedAtRoute(GetTaskEndpointName, new { id = task.Id }, task.ToDTO());
+      return Results.CreatedAtRoute(GetTaskEndpointName, new { id = task.Id }, task.ToSummaryDTO());
     });
 
     //PUT /tasks/{id}/edit/
@@ -102,7 +72,7 @@ public static class TaskEndpoints
       task.CompletedAt = updatedTask.CompletedAt;
 
       dbContext.SaveChanges();
-      return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, task.ToDTO());
+      return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, task.ToSummaryDTO());
     });
 
     //DELETE /tasks/{id}

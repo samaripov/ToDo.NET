@@ -18,13 +18,26 @@ public static class TaskMapping
       };
   }
 
-  public static TaskDTO ToDTO(this Entities.Task task)
+  public static TaskDetailsDTO ToDetailsDTO(this Entities.Task task)
   {
-    return new TaskDTO(
+    return new TaskDetailsDTO(
       task.Id,
       task.Title,
       task.Description,
       task.PriorityId,
+      task.Complete,
+      task.CreatedAt,
+      task.CompletedAt
+      );
+  }
+
+  public static TaskSummaryDTO ToSummaryDTO(this Entities.Task task)
+  {
+    return new TaskSummaryDTO(
+      task.Id,
+      task.Title,
+      task.Description,
+      task.Priority,
       task.Complete,
       task.CreatedAt,
       task.CompletedAt

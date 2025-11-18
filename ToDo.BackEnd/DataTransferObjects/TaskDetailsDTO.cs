@@ -2,7 +2,7 @@ using System;
 
 namespace ToDo.BackEnd.DataTransferObjects;
 
-public record class TaskDTO(
+public record class TaskDetailsDTO(
   int Id,
   string Title,
   string Description,
