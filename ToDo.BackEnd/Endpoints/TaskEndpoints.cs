@@ -14,23 +14,23 @@ public static class TaskEndpoints
   { 
     var group = app.MapGroup("tasks").WithParameterValidation();
     // GET /tasks
-    group.MapGet("/", (TaskStoreContext dbContext) => 
-      dbContext.Tasks
+    group.MapGet("/", async (TaskStoreContext dbContext) => 
+      await dbContext.Tasks
         .Select(task => task.ToDetailsDTO())
         .AsNoTracking()
         .ToListAsync()
-        );
+    );
 
     // GET /tasks/{id}
-    group.MapGet("/{id}", (int id, TaskStoreContext dbContext) =>
+    group.MapGet("/{id}", async (int id, TaskStoreContext dbContext) =>
     {
-      Entities.Task? task = dbContext.Tasks.Find(id);
+      Entities.Task? task = await dbContext.Tasks.FindAsync(id);
       return task is null ? Results.NotFound() : Results.Ok(task.ToDetailsDTO());
     }).WithName(GetTaskEndpointName);
 
 
     //POST /tasks/new
-    group.MapPost("/new", (CreateTaskDTO newTask, TaskStoreContext dbContext) =>
+    group.MapPost("/new", async (CreateTaskDTO newTask, TaskStoreContext dbContext) =>
     {
       var Priority = dbContext.Priorities.Find(newTask.PriorityId);
       
@@ -43,22 +43,22 @@ public static class TaskEndpoints
       task.Priority = Priority.Value;
 
       dbContext.Tasks.Add(task);
-      dbContext.SaveChanges();
+      await dbContext.SaveChangesAsync();
 
       return Results.CreatedAtRoute(GetTaskEndpointName, new { id = task.Id }, task.ToSummaryDTO());
     });
 
     //PUT /tasks/{id}/edit/
-    group.MapPut("/{id}/edit", (int id, UpdateTaskDTO updatedTask, TaskStoreContext dbContext) =>
+    group.MapPut("/{id}/edit", async (int id, UpdateTaskDTO updatedTask, TaskStoreContext dbContext) =>
     {
-      var existingTask = dbContext.Tasks.Find(id);
+      var existingTask = await dbContext.Tasks.FindAsync(id);
 
       if (existingTask is null)
       {
         return Results.NotFound();
       }
 
-      var priority = dbContext.Priorities.Find(updatedTask.PriorityId);
+      var priority = await dbContext.Priorities.FindAsync(updatedTask.PriorityId);
       if (priority is null)
       {
         return Results.UnprocessableEntity();
@@ -70,14 +70,14 @@ public static class TaskEndpoints
         .CurrentValues
         .SetValues(updatedTaskEntity);
 
-      dbContext.SaveChanges();
+      await dbContext.SaveChangesAsync();
       return Results.AcceptedAtRoute(GetTaskEndpointName, new { id }, existingTask.ToSummaryDTO());
     });
 
     //DELETE /tasks/{id}
-    group.MapDelete("/{id}", (int id, TaskStoreContext dbContext) =>
+    group.MapDelete("/{id}", async (int id, TaskStoreContext dbContext) =>
     {
-      dbContext.Tasks.Where((task) => task.Id == id).ExecuteDelete();
+      await dbContext.Tasks.Where((task) => task.Id == id).ExecuteDeleteAsync();
       return Results.NoContent();
     });
     return group;

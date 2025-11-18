@@ -18,15 +18,15 @@ Content-Type: application/json
   "completedAt": null
 }
 ###
-PUT http://localhost:5234/tasks/2/edit
+PUT http://localhost:5234/tasks/6/edit
 Content-Type: application/json
 
 {
-  "title": "Wash the Dishes",
-  "description": "",
-  "PriorityId": "2",
+  "title": "Cook dinner",
+  "description": "I was thinking pizza",
+  "priorityId": 1,
   "complete": true,
-  "createdAt": "2025-11-17T15:18:03.4532118-05:00",
+  "createdAt": "2025-11-18T18:05:19.2162004",
   "completedAt": "2025-11-17T15:18:03.4550661-05:00"
 }
 ###
