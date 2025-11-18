@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "r8MM8D8aswIl96tlTpDTsYTSfnMLHFleVhgvuOEzoz8=",
+  "Hash": "KPH2Y+azUnjWItlNS1WGfCFp27Rj9oH8nk0X6enWRvQ=",
   "Source": "ToDo.FrontEnd",
   "BasePath": "_content/ToDo.FrontEnd",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "ToDo.FrontEnd\\wwwroot",
       "Source": "ToDo.FrontEnd",
-      "ContentRoot": "C:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\wwwroot\\",
       "BasePath": "_content/ToDo.FrontEnd",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ToDo.FrontEnd.styles.css",
+      "Identity": "c:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ToDo.FrontEnd.styles.css",
       "SourceId": "ToDo.FrontEnd",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "c:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/ToDo.FrontEnd",
       "RelativePath": "ToDo.FrontEnd.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ToDo.FrontEnd.styles.css"
+      "OriginalItemSpec": "c:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ToDo.FrontEnd.styles.css"
     },
     {
-      "Identity": "C:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ToDo.FrontEnd.bundle.scp.css",
+      "Identity": "c:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ToDo.FrontEnd.bundle.scp.css",
       "SourceId": "ToDo.FrontEnd",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "c:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/ToDo.FrontEnd",
       "RelativePath": "ToDo.FrontEnd.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ToDo.FrontEnd.bundle.scp.css"
+      "OriginalItemSpec": "c:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ToDo.FrontEnd.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\wwwroot\\app.css",
+      "Identity": "c:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\wwwroot\\app.css",
       "SourceId": "ToDo.FrontEnd",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\aripo\\OneDrive\\Desktop\\BlazorProjects\\ToDo\\ToDo.FrontEnd\\wwwroot\\",
       "BasePath": "_content/ToDo.FrontEnd",
       "RelativePath": "app.css",
       "AssetKind": "All",
