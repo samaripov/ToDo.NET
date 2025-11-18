@@ -45,9 +45,9 @@ public static class TaskEndpoints
     group.MapGet("/", (TaskStoreContext dbContext) => dbContext.Tasks);
 
     // GET /tasks/{id}
-    group.MapGet("/{id}", (int id) =>
+    group.MapGet("/{id}", (int id, TaskStoreContext dbContext) =>
     {
-      var task = tasks.Find((task) => task.Id == id);
+      var task = dbContext.Tasks.Find(id);
       return task is null ? Results.NotFound() : Results.Ok(task);
     }).WithName(GetTaskEndpointName);
 
