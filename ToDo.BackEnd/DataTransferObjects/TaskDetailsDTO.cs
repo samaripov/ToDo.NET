@@ -9,5 +9,5 @@ public record class TaskDetailsDTO(
   int PriorityId,
   bool Complete,
   DateTime CreatedAt,
-  DateTime CompletedAt
+  DateTime? CompletedAt
 );

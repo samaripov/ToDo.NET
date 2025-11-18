@@ -17,7 +17,9 @@ public static class TaskEndpoints
     group.MapGet("/", (TaskStoreContext dbContext) => 
       dbContext.Tasks
         .Select(task => task.ToDetailsDTO())
-        .AsNoTracking());
+        .AsNoTracking()
+        .ToListAsync()
+        );
 
     // GET /tasks/{id}
     group.MapGet("/{id}", (int id, TaskStoreContext dbContext) =>

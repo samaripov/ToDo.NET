@@ -13,9 +13,9 @@ Content-Type: application/json
   "title": "Cook dinner",
   "description": "I was thinking pizza",
   "PriorityId": "1",
-  "complete": true,
+  "complete": false,
   "createdAt": "2025-11-17T15:04:57.074668-05:00",
-  "completedAt": "2025-11-17T15:04:57.0746681-05:00"
+  "completedAt": null
 }
 ###
 PUT http://localhost:5234/tasks/2/edit
