@@ -106,10 +106,16 @@ public static class TaskEndpoints
     });
 
     //DELETE /tasks/{id}
-    group.MapDelete("/{id}", (int id) =>
+    group.MapDelete("/{id}", (int id, TaskStoreContext dbContext) =>
     {
-      var task = tasks.RemoveAll(task => task.Id == id);
-      return task == 0 ? Results.NotFound() : Results.Accepted();
+      var task = dbContext.Tasks.Find(id);
+      if (task is null)
+      {
+        return Results.NotFound();
+      }
+      dbContext.Tasks.Remove(task);
+      dbContext.SaveChanges();
+      return Results.Accepted();
     });
     return group;
   }
