@@ -2,6 +2,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using ToDo.BackEnd.Data;
 using ToDo.BackEnd.DataTransferObjects;
+using ToDo.BackEnd.Mapping;
 
 namespace ToDo.BackEnd.Endpoints;
 
@@ -15,7 +16,6 @@ public static class TaskEndpoints
       "Dishes",
       "Wash the dishes",
       "High",
-      1,
       false,
       DateTime.Now,
       DateTime.Now
@@ -25,7 +25,6 @@ public static class TaskEndpoints
       "HW",
       "Finish homework",
       "High",
-      1,
       false,
       DateTime.Now,
       DateTime.Now
@@ -35,7 +34,6 @@ public static class TaskEndpoints
       "Bathroom",
       "Wash the bathroom",
       "High",
-      1,
       false,
       DateTime.Now,
       DateTime.Now
@@ -66,20 +64,13 @@ public static class TaskEndpoints
         return Results.UnprocessableEntity();
       }
 
-      Entities.Task task = new()
-      {
-        Title = newTask.Title,
-        Description = newTask.Description,
-        Priority = Priority.Value,
-        PriorityId = newTask.PriorityId,
-        Complete = newTask.Complete,
-        CompletedAt = newTask.CompletedAt
-      };
+      Entities.Task task = newTask.ToEntity();
+      task.Priority = Priority.Value;
 
       dbContext.Tasks.Add(task);
       dbContext.SaveChanges();
 
-      return Results.CreatedAtRoute(GetTaskEndpointName, new { id = task.Id }, task);
+      return Results.CreatedAtRoute(GetTaskEndpointName, new { id = task.Id }, task.ToDTO());
     });
 
     //PUT /tasks/{id}/edit/

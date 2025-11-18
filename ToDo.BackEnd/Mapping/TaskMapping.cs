@@ -24,7 +24,6 @@ public static class TaskMapping
       task.Title,
       task.Description,
       task.Priority,
-      task.PriorityId,
       task.Complete,
       task.CreatedAt,
       task.CompletedAt

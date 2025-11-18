@@ -7,7 +7,6 @@ public record class TaskDTO(
   string Title,
   string Description,
   string Priority,
-  int PriorityId,
   bool Complete,
   DateTime CreatedAt,
   DateTime CompletedAt
