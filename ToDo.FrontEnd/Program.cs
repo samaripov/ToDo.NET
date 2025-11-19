@@ -7,8 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
   .AddInteractiveServerComponents();
 
+var taskStoreURL = builder.Configuration["TaskStoreAPIUrl"] ?? 
+  throw new Exception("TaskStoreAPIUrl is not set.");
+
+builder.Services.AddHttpClient<TasksClient>(client =>
+{
+    client.BaseAddress = new Uri(taskStoreURL); 
+});
+
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<TasksClient>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

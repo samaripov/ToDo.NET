@@ -53,7 +53,7 @@ public static class TaskMapping
       task.Id,
       task.Title,
       task.Description,
-      task.Priority,
+      new PriorityDTO(task.PriorityId, task.Priority),
       task.Complete,
       task.CreatedAt,
       task.CompletedAt

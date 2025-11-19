@@ -1,45 +1,18 @@
 namespace ToDo.FrontEnd.Clients;
 
-public class TasksClient
+public class TasksClient(HttpClient httpClient)
 {
-  private readonly List<Models.Task> tasks = new List<Models.Task> {
-  new Models.Task {
-      Id = 1,
-      Title = "Clean the dishes",
-      Description = "The sink is way too full. A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dogThe sink is way too full... A quick brown fox jumps over the lazy dog",
-      Complete = false,
-      Priority = new Models.Priority{
-        Value = "High"
-      }
-    },
-    new Models.Task {
-      Id = 2,
-      Title = "Make bed",
-      Description = "It's messy",
-      Complete = true,
-      CompletedAt = DateTime.Now,
-      Priority = new Models.Priority{
-        Value = "Medium"
-      }
-    },
-    new Models.Task {
-      Id = 3,
-      Title = "Finish work",
-      Complete = false,
-      Priority = new Models.Priority{
-        Value = "Low"
-      }
-    }
-  };
+  public Uri url = httpClient.BaseAddress;
+  private readonly Models.Task[] tasks;
 
-  public List<Models.Task> GetTasks() => tasks;
+  public async Task<Models.Task[]> GetTasksAsync() 
+    => await httpClient.GetFromJsonAsync<Models.Task[]>("") ?? [];
 
   public void AddTask(Models.Task taskToAdd) 
   {
     ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Title);
     ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Priority.Value);
-    taskToAdd.Id = tasks.Count > 0 ? tasks.Count + 1 : 1;
-    tasks.Add(taskToAdd);
+    // httpClient.PostAsJsonAsync("/new");
   }
 
   public void UpdateTask(Models.Task taskToUpdate) 
@@ -88,10 +61,11 @@ public class TasksClient
     return "Low";
   }
   public Models.Task? GetTaskById(int taskId) {
-    return tasks.Find(task => task.Id == taskId);
+    // return tasks.Find(task => task.Id == taskId);
+    return null;
   }
   public Task DeleteTask(int taskId) {
-    tasks.RemoveAll(t => t.Id == taskId);
+    // tasks.RemoveAll(t => t.Id == taskId);
     return System.Threading.Tasks.Task.CompletedTask;
   }  
 }
