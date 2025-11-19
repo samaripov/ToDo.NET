@@ -4,7 +4,7 @@
 
 <tr id="task_@(task.Id)" class="hoverable">
   <td>@task.Title</td>
-  <td class="abbreviate_text">@task.Description</td>
+  <td class="">@task.Description</td>
   <td class="@GetBackgroundColor() text-center align-middle fw-bold">@task.Priority.Value</td>
   <td><span>@task.CreatedAt.Humanize()</span></td>
   <td class="">
