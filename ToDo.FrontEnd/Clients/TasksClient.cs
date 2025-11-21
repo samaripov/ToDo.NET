@@ -73,8 +73,6 @@ public class TasksClient(HttpClient httpClient)
   }
   public async System.Threading.Tasks.Task<Models.Task?> GetTaskByIdAsync(int taskId) 
   => await httpClient.GetFromJsonAsync<Models.Task>($"/tasks/{taskId}");
-  public Task DeleteTask(int taskId) {
-    // tasks.RemoveAll(t => t.Id == taskId);
-    return System.Threading.Tasks.Task.CompletedTask;
-  }  
+  public async Task DeleteTask(int taskId) 
+  => await httpClient.DeleteAsync($"/tasks/{taskId}");
 }
