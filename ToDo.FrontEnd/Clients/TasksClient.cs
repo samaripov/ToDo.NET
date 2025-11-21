@@ -8,11 +8,19 @@ public class TasksClient(HttpClient httpClient)
   public async Task<Models.Task[]> GetTasksAsync() 
     => await httpClient.GetFromJsonAsync<Models.Task[]>("") ?? [];
 
-  public void AddTask(Models.Task taskToAdd) 
+  public async void AddTask(Models.Task taskToAdd) 
   {
     ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Title);
     ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Priority.Value);
-    // httpClient.PostAsJsonAsync("/new");
+    var taskDTO = new
+    {
+      title = taskToAdd.Title,
+      description = taskToAdd.Description,
+      PriorityId = taskToAdd.Priority.ValueAsNumString()
+    };
+    Console.WriteLine(taskDTO);
+    var response = await httpClient.PostAsJsonAsync("/new", taskDTO);
+    response.EnsureSuccessStatusCode();
   }
 
   public void UpdateTask(Models.Task taskToUpdate) 

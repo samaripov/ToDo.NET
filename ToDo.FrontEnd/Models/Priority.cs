@@ -8,4 +8,16 @@ public class Priority
   [Required(ErrorMessage = "A priority is required.")]
   [MinLength(1, ErrorMessage = "Please select a priority.")]
   public required string Value { get; set; }
+
+  public string ValueAsNumString()
+  {
+    switch(Value)
+    {
+      case "High":
+        return "1";
+      case "Medium":
+        return "2";
+    }
+    return "3";
+  }
 }

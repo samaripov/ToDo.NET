@@ -25,7 +25,7 @@ public static class TaskEndpoints
     group.MapGet("/{id}", async (int id, TaskStoreContext dbContext) =>
     {
       Entities.Task? task = await dbContext.Tasks.FindAsync(id);
-      return task is null ? Results.NotFound() : Results.Ok(task.ToDetailsDTO());
+      return task is null ? Results.NotFound() : Results.Ok(task.ToSummaryDTO());
     }).WithName(GetTaskEndpointName);
 
 

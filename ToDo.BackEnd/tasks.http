@@ -10,21 +10,19 @@ POST http://localhost:5234/tasks/new
 Content-Type: application/json
 
 {
-  "title": "Cook dinner",
+  "title": "eee dinner",
   "description": "I was thinking pizza",
   "PriorityId": "1",
-  "complete": false,
-  "createdAt": "2025-11-17T15:04:57.074668-05:00",
-  "completedAt": null
+  "createdAt": "2025-11-18T18:05:19.2162004"
 }
 ###
 PUT http://localhost:5234/tasks/6/edit
 Content-Type: application/json
 
 {
-  "title": "Cook dinner",
-  "description": "I was thinking pizza",
-  "priorityId": 1,
+  "title": "Wash Dishes",
+  "description": "222g pizza",
+  "priorityId": 3,
   "complete": true,
   "createdAt": "2025-11-18T18:05:19.2162004",
   "completedAt": "2025-11-17T15:18:03.4550661-05:00"

@@ -13,9 +13,8 @@ public class Task
   public bool Complete { get; set; } = false;
   
   [Required(ErrorMessage = "A priority is required.")]
-  [MinLength(1, ErrorMessage = "Please select a priority.")]
   public required Models.Priority Priority { get; set; }
-  public DateTime CreatedAt { get; } = DateTime.Now;  
+  public DateTime CreatedAt { get; set; }  
   public DateTime? CompletedAt { get; set; }
 
   public override string ToString() 
