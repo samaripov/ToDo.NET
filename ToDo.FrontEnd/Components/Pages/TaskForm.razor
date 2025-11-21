@@ -66,15 +66,24 @@
     }
   }
 
-  private void HandleSubmit() 
+  private async System.Threading.Tasks.Task HandleSubmit() 
   {
     if (task is not null && task.Priority.Value != "") {
-      if (Task_Id is null) {
-        TasksClient.AddTask(task);
+try
+      {
+        if (Task_Id is null)
+        {
+          await TasksClient.AddTaskAsync(task);
+        }
+        else
+        {
+          await TasksClient.UpdateTaskAsync(task);
+        }
         NavigationManager.NavigateTo("/");
-      } else {
-        TasksClient.UpdateTask(task);
-        NavigationManager.NavigateTo("/");
+      }
+      catch (Exception ex)
+      {
+        Console.Error.WriteLine(ex);
       }
     }
   }

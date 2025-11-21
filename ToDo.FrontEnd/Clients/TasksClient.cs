@@ -5,25 +5,25 @@ public class TasksClient(HttpClient httpClient)
   public Uri url = httpClient.BaseAddress;
   private readonly Models.Task[] tasks;
 
-  public async Task<Models.Task[]> GetTasksAsync() 
-    => await httpClient.GetFromJsonAsync<Models.Task[]>("") ?? [];
+  public async System.Threading.Tasks.Task<Models.Task[]> GetTasksAsync() 
+    => await httpClient.GetFromJsonAsync<Models.Task[]>("/tasks") ?? [];
 
-  public async void AddTask(Models.Task taskToAdd) 
+  public async System.Threading.Tasks.Task AddTaskAsync(Models.Task taskToAdd) 
   {
     ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Title);
     ArgumentException.ThrowIfNullOrWhiteSpace(taskToAdd.Priority.Value);
     var taskDTO = new
     {
-      title = taskToAdd.Title,
-      description = taskToAdd.Description,
-      PriorityId = taskToAdd.Priority.ValueAsNumString()
+      taskToAdd.Title,
+      taskToAdd.Description,
+      PriorityId = taskToAdd.Priority.ValueAsNumString(),
+      CreatedAt = DateTime.Now
     };
-    Console.WriteLine(taskDTO);
-    var response = await httpClient.PostAsJsonAsync("/new", taskDTO);
+    var response = await httpClient.PostAsJsonAsync("/tasks/new", taskDTO);
     response.EnsureSuccessStatusCode();
   }
 
-  public void UpdateTask(Models.Task taskToUpdate) 
+  public async System.Threading.Tasks.Task UpdateTaskAsync(Models.Task taskToUpdate) 
   {
     var existingTask = GetTaskById(taskToUpdate.Id);
     if (existingTask != null)
