@@ -1,5 +1,6 @@
 ﻿
 @using Humanizer
+@using System.Threading.Tasks
 @rendermode InteractiveServer
 
 <tr id="task_@(task.Id)" class="hoverable">
@@ -17,15 +18,15 @@
 
 @code {
   [Parameter] public required Models.Task task { get; set; }
-  [Parameter] public required EventCallback<int> DeleteTask { get; set; }
+  [Parameter] public required EventCallback<int> DeleteTaskAsync { get; set; }
+  [Parameter] public required EventCallback<int> CompleteTaskAsync { get; set; }
 
   private async System.Threading.Tasks.Task HandleTaskDeletion() {
-    await DeleteTask.InvokeAsync(task.Id);
+    await DeleteTaskAsync.InvokeAsync(task.Id);
   }
 
-  private void ToggleComplete() {
-    task.Complete = !task.Complete;
-    task.CompletedAt = DateTime.Now;
+  private async System.Threading.Tasks.Task ToggleComplete() {
+    await CompleteTaskAsync.InvokeAsync();
   }
 
   private string GetBackgroundColor() {

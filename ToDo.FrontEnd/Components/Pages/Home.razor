@@ -23,7 +23,8 @@
         {
           <TaskView
             task="@task"
-            DeleteTask = "HandleDeleteTask"
+            DeleteTaskAsync = "HandleDeleteTaskAsync"
+            CompleteTaskAsync = "() => HandleCompleteTaskAsync(task)"
           />
         }
       }
@@ -40,9 +41,12 @@
         base.OnInitialized();
         tasks = await Client.GetTasksAsync();
     }
-
-    private async System.Threading.Tasks.Task HandleDeleteTask(int taskId) {
-      await Client.DeleteTask(taskId);
+    private async System.Threading.Tasks.Task HandleCompleteTaskAsync(Models.Task taskToComplete) {
+      await Client.CompleteTaskAsync(taskToComplete);
+      tasks = await Client.GetTasksAsync();
+    }
+    private async System.Threading.Tasks.Task HandleDeleteTaskAsync(int taskId) {
+      await Client.DeleteTaskAsync(taskId);
       tasks = await Client.GetTasksAsync();
     }
 }

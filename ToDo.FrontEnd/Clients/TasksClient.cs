@@ -1,3 +1,5 @@
+using ToDo.FrontEnd.Models;
+
 namespace ToDo.FrontEnd.Clients;
 
 public class TasksClient(HttpClient httpClient)
@@ -71,8 +73,20 @@ public class TasksClient(HttpClient httpClient)
     }
     return "Low";
   }
+  public async System.Threading.Tasks.Task CompleteTaskAsync(Models.Task taskToComplete)
+  {
+    await httpClient.PutAsJsonAsync($"tasks/{taskToComplete.Id}/edit", new
+    {
+      taskToComplete.Title,
+      taskToComplete.Description,
+      taskToComplete.CreatedAt,
+      PriorityId = taskToComplete.Priority.ValueAsNumString(),
+      Complete = !taskToComplete.Complete,
+      CompletedAt = DateTime.Now 
+    });
+  }
   public async System.Threading.Tasks.Task<Models.Task?> GetTaskByIdAsync(int taskId) 
   => await httpClient.GetFromJsonAsync<Models.Task>($"/tasks/{taskId}");
-  public async Task DeleteTask(int taskId) 
+  public async System.Threading.Tasks.Task DeleteTaskAsync(int taskId) 
   => await httpClient.DeleteAsync($"/tasks/{taskId}");
 }
