@@ -16,13 +16,13 @@ Content-Type: application/json
   "createdAt": "2025-11-18T18:05:19.2162004"
 }
 ###
-PUT http://localhost:5234/tasks/6/edit
+PUT http://localhost:5234/tasks/1/edit
 Content-Type: application/json
 
 {
   "title": "Wash Dishes",
   "description": "222g pizza",
-  "priorityId": 3,
+  "PriorityId": 1,
   "complete": true,
   "createdAt": "2025-11-18T18:05:19.2162004",
   "completedAt": "2025-11-17T15:18:03.4550661-05:00"

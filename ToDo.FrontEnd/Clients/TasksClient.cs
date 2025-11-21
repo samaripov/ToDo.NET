@@ -2,9 +2,6 @@ namespace ToDo.FrontEnd.Clients;
 
 public class TasksClient(HttpClient httpClient)
 {
-  public Uri url = httpClient.BaseAddress;
-  private readonly Models.Task[] tasks;
-
   public async System.Threading.Tasks.Task<Models.Task[]> GetTasksAsync() 
     => await httpClient.GetFromJsonAsync<Models.Task[]>("/tasks") ?? [];
 
@@ -25,25 +22,31 @@ public class TasksClient(HttpClient httpClient)
 
   public async System.Threading.Tasks.Task UpdateTaskAsync(Models.Task taskToUpdate) 
   {
-    var existingTask = GetTaskById(taskToUpdate.Id);
+    var existingTask = GetTaskByIdAsync(taskToUpdate.Id);
     if (existingTask != null)
     {
-      existingTask.Title = taskToUpdate.Title;
-      existingTask.Description = taskToUpdate.Description;
-      existingTask.Priority.Value = taskToUpdate.Priority.Value;
-      existingTask.Complete = taskToUpdate.Complete;
-      existingTask.CompletedAt = taskToUpdate.CompletedAt;
+      var taskDTO = new 
+      {
+        taskToUpdate.Title,
+        taskToUpdate.Description,
+        PriorityId = taskToUpdate.Priority.ValueAsNumString(),
+        taskToUpdate.Complete,
+        taskToUpdate.CompletedAt
+      };
+      var response = await httpClient.PutAsJsonAsync($"/tasks/{taskToUpdate.Id}/edit", taskDTO);
+      response.EnsureSuccessStatusCode();
     }
   }
 
-  public List<Models.Task> GetTasksByPriority(Boolean reverse = false)
+  public List<Models.Task>? GetTasksByPriority(Boolean reverse = false)
   {
-    var sortedTasks = tasks.OrderBy(task => convertPriorityToInt(task.Priority.Value));
-    if (reverse)
-    {
-      return sortedTasks.Reverse().ToList();
-    }
-    return sortedTasks.ToList();
+    // var sortedTasks = tasks.OrderBy(task => convertPriorityToInt(task.Priority.Value));
+    // if (reverse)
+    // {
+    //   return sortedTasks.Reverse().ToList();
+    // }
+    // return sortedTasks.ToList();
+    return null;
   }
 
   public int convertPriorityToInt(String priorityString)
@@ -68,10 +71,8 @@ public class TasksClient(HttpClient httpClient)
     }
     return "Low";
   }
-  public Models.Task? GetTaskById(int taskId) {
-    // return tasks.Find(task => task.Id == taskId);
-    return null;
-  }
+  public async System.Threading.Tasks.Task<Models.Task?> GetTaskByIdAsync(int taskId) 
+  => await httpClient.GetFromJsonAsync<Models.Task>($"/tasks/{taskId}");
   public Task DeleteTask(int taskId) {
     // tasks.RemoveAll(t => t.Id == taskId);
     return System.Threading.Tasks.Task.CompletedTask;

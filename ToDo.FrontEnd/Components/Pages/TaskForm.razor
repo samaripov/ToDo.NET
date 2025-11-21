@@ -1,45 +1,50 @@
 ﻿@page "/task_form/new"
 @page "/task_form/{Task_Id:int}"
+@using System.Threading.Tasks
 @inject NavigationManager NavigationManager
 @inject TasksClient TasksClient
 @rendermode InteractiveServer
 
 <PageTitle>@pageTitle</PageTitle>
 
-<div class="d-flex justify-content-center align-self-center">
-  <div class="col-md-3 center w-75">
-    <h3>@pageTitle</h3> 
-    <EditForm Model="@task" FormName="editTask" OnValidSubmit="HandleSubmit">
-      <DataAnnotationsValidator />
-      <div class="mb-3">
-        <InputText id="title" placeholder="Title" @bind-Value="task.Title" class="form-control bg-dark text-white" />
-        <ValidationMessage For="() => task.Title"/>
-      </div>
-      <div class="mb-3">
-        <InputTextArea id="description" placeholder="description" @bind-Value="task.Description"
-          class="form-control bg-dark text-white" />
-      </div>
-      <div class="mb-3">
-        <label for="priority">Priority</label>
-        <InputSelect 
-          id="priority" 
-          @bind-Value="task.Priority.Value" 
-          class="form-select bg-dark text-white"
-        >
-          <option value="">Select a Priority</option>
-          <option class="bg-danger" value="High">High</option>
-          <option class="bg-warning" value="Medium">Medium</option>
-          <option class="bg-success" value="Low">Low</option>
-        </InputSelect>
-        <ValidationMessage For="() => task.Priority.Value"/>
-      </div>
-      <div class="d-flex flex-row gap-1">
-        <a class="btn btn-danger w-25" role="button" href="/">Cancel</a>
-        <button type="submit" class="btn btn-success w-75">@(Task_Id.HasValue ? "Update Task" : "Add Task")</button>
-      </div>
-    </EditForm>
+@if (task is null) {
+  <div class="text-center p-3"><em>Loading...</em></div>
+} else {
+  <div class="d-flex justify-content-center align-self-center">
+    <div class="col-md-3 center w-75">
+      <h3>@pageTitle</h3> 
+      <EditForm Model="@task" FormName="editTask" OnValidSubmit="HandleSubmit">
+        <DataAnnotationsValidator />
+        <div class="mb-3">
+          <InputText id="title" placeholder="Title" @bind-Value="task.Title" class="form-control bg-dark text-white" />
+          <ValidationMessage For="() => task.Title"/>
+        </div>
+        <div class="mb-3">
+          <InputTextArea id="description" placeholder="description" @bind-Value="task.Description"
+            class="form-control bg-dark text-white" />
+        </div>
+        <div class="mb-3">
+          <label for="priority">Priority</label>
+          <InputSelect 
+            id="priority" 
+            @bind-Value="task.Priority.Value" 
+            class="form-select bg-dark text-white"
+          >
+            <option value="">Select a Priority</option>
+            <option class="bg-danger" value="High">High</option>
+            <option class="bg-warning" value="Medium">Medium</option>
+            <option class="bg-success" value="Low">Low</option>
+          </InputSelect>
+          <ValidationMessage For="() => task.Priority.Value"/>
+        </div>
+        <div class="d-flex flex-row gap-1">
+          <a class="btn btn-danger w-25" role="button" href="/">Cancel</a>
+          <button type="submit" class="btn btn-success w-75">@(Task_Id.HasValue ? "Update Task" : "Add Task")</button>
+        </div>
+      </EditForm>
+    </div>
   </div>
-</div>
+}
 @code {
   [Parameter]
   public int? Task_Id { get; set; }
@@ -47,29 +52,28 @@
   private Models.Task? task { get; set; }
   private string pageTitle;
 
-  protected override void OnParametersSet()
+  protected override async System.Threading.Tasks.Task OnParametersSetAsync()
   { 
-    if(task is not null) {
-      return;
+    if(task is null) {
+      if (Task_Id.HasValue) {
+        task = await TasksClient.GetTaskByIdAsync(Task_Id.Value);
+        task.Id = Task_Id.Value;
+        pageTitle = "Edit Task";
+      } else {
+        pageTitle = "New Task";
+        task = new()
+        {
+          Title = "",
+          Priority = new Models.Priority{Value=""}
+        };
+      }
     } 
-    if (Task_Id.HasValue) {
-      task = TasksClient.GetTaskById(Task_Id.Value);;
-      task.Id = Task_Id.Value;
-      pageTitle = "Edit Task";
-    } else {
-      pageTitle = "New Task";
-      task = new()
-      {
-        Title = "",
-        Priority = new Models.Priority{Value=""}
-      };
-    }
   }
 
   private async System.Threading.Tasks.Task HandleSubmit() 
   {
     if (task is not null && task.Priority.Value != "") {
-try
+    try
       {
         if (Task_Id is null)
         {
